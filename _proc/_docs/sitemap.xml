@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/index.html</loc>
+    <lastmod>2025-04-08T05:50:48.896Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/transpose_of_matrix.html</loc>
+    <lastmod>2025-04-08T05:50:48.889Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/core.html</loc>
+    <lastmod>2025-04-08T05:09:06.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/matrix_vector_dot_product.html</loc>
+    <lastmod>2025-04-08T05:52:39.149Z</lastmod>
+  </url>
 </urlset>

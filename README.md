@@ -8,9 +8,6 @@ documentation.
 
 ## Developer Guide
 
-If you are new to using `nbdev` here are some useful pointers to get you
-started.
-
 ### Install BuildingBlocks in Development mode
 
 ``` sh
@@ -47,21 +44,47 @@ or from [pypi](https://pypi.org/project/BuildingBlocks/)
 $ pip install BuildingBlocks
 ```
 
-### Documentation
+## Testing Matrix-Vector Dot Product
 
-Documentation can be found hosted on this GitHub
-[repository](https://github.com/teja00/BuildingBlocks)’s
-[pages](https://teja00.github.io/BuildingBlocks/). Additionally you can
-find package manager specific guidelines on
-[conda](https://anaconda.org/teja00/BuildingBlocks) and
-[pypi](https://pypi.org/project/BuildingBlocks/) respectively.
-
-## How to use
-
-Fill me in please! Don’t forget code examples:
+### Initialize a Matrix and a Vector
 
 ``` python
-1+1
+# pass test case
+a = [[1, 2], [2, 4]]
+b = [1, 2]
+res = [5, 10]
+# fail test case
+a = [[1, 2], [2, 4]]
+b = [1, 2]
+res = [5, 11]
+
+::: {.cell}
+``` {.python .cell-code}
+result = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])
+assert result == [5, 10], "Test failed"
+print("Test passed!")
 ```
 
-    2
+<div class="cell-output cell-output-stdout">
+
+    Test passed!
+
+</div>
+
+:::
+
+``` python
+result = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])
+# assert result == [5, 11], "Test failed: Expected [5, 11], got " + str(result)
+# print("Test passed!")  # This won't run
+```
+
+    AssertionError: Test failed: Expected [5, 11], got [5, 10]
+    [0;31m---------------------------------------------------------------------------[0m
+    [0;31mAssertionError[0m                            Traceback (most recent call last)
+    Cell [0;32mIn[11], line 2[0m
+    [1;32m      1[0m result [38;5;241m=[39m matrix_dot_vector([[[38;5;241m1[39m, [38;5;241m2[39m], [[38;5;241m2[39m, [38;5;241m4[39m]], [[38;5;241m1[39m, [38;5;241m2[39m])
+    [0;32m----> 2[0m [38;5;28;01massert[39;00m result [38;5;241m==[39m [[38;5;241m5[39m, [38;5;241m11[39m], [38;5;124m"[39m[38;5;124mTest failed: Expected [5, 11], got [39m[38;5;124m"[39m [38;5;241m+[39m [38;5;28mstr[39m(result)
+    [1;32m      3[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mTest passed![39m[38;5;124m"[39m)  [38;5;66;03m# This won't run[39;00m
+
+    [0;31mAssertionError[0m: Test failed: Expected [5, 11], got [5, 10]

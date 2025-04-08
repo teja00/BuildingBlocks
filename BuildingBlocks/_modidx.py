@@ -5,4 +5,6 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://teja00.github.io',
                 'git_url': 'https://github.com/teja00/BuildingBlocks',
                 'lib_path': 'BuildingBlocks'},
-  'syms': {'BuildingBlocks.core': {'BuildingBlocks.core.foo': ('core.html#foo', 'BuildingBlocks/core.py')}}}
+  'syms': { 'BuildingBlocks.matrix_vector_dot_product': { 'BuildingBlocks.matrix_vector_dot_product.matrix_dot_vector': ( 'matrix_vector_dot_product.html#matrix_dot_vector',
+                                                                                                                          'BuildingBlocks/matrix_vector_dot_product.py')},
+            'BuildingBlocks.transpose_matrix': {}}}

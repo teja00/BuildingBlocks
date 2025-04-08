@@ -1,0 +1,89 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BuildingBlocks",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "BuildingBlocks"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "BuildingBlocks",
+    "section": "Developer Guide",
+    "text": "Developer Guide\n\nInstall BuildingBlocks in Development mode\n# make sure BuildingBlocks package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to BuildingBlocks\n$ nbdev_prepare",
+    "crumbs": [
+      "BuildingBlocks"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "BuildingBlocks",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/teja00/BuildingBlocks.git\nor from conda\n$ conda install -c teja00 BuildingBlocks\nor from pypi\n$ pip install BuildingBlocks",
+    "crumbs": [
+      "BuildingBlocks"
+    ]
+  },
+  {
+    "objectID": "index.html#testing-matrix-vector-dot-product",
+    "href": "index.html#testing-matrix-vector-dot-product",
+    "title": "BuildingBlocks",
+    "section": "Testing Matrix-Vector Dot Product",
+    "text": "Testing Matrix-Vector Dot Product\n\nInitialize a Matrix and a Vector\na = [[1, 2], [2, 4]]\nb = [1, 2]\n\n::: {#cell-10 .cell}\n``` {.python .cell-code}\nassert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 10], \"Test case Passed\"\n\nassert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 11], \"Test case Failed\"\n\n2\n\n:::",
+    "crumbs": [
+      "BuildingBlocks"
+    ]
+  },
+  {
+    "objectID": "transpose_of_matrix.html",
+    "href": "transpose_of_matrix.html",
+    "title": "Transpose of a Matrix",
+    "section": "",
+    "text": "def transpose_matrix(a: list[list[int|float]]) -&gt; list[list[int|float]]:\n    pass",
+    "crumbs": [
+      "Transpose of a Matrix"
+    ]
+  },
+  {
+    "objectID": "transpose_of_matrix.html#simple-implemetation-on-how-to-transpose-a-matrix",
+    "href": "transpose_of_matrix.html#simple-implemetation-on-how-to-transpose-a-matrix",
+    "title": "Transpose of a Matrix",
+    "section": "",
+    "text": "def transpose_matrix(a: list[list[int|float]]) -&gt; list[list[int|float]]:\n    pass",
+    "crumbs": [
+      "Transpose of a Matrix"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "foo\n\n foo ()"
+  },
+  {
+    "objectID": "matrix_vector_dot_product.html",
+    "href": "matrix_vector_dot_product.html",
+    "title": "Matrix Vector Dot Product",
+    "section": "",
+    "text": "check if the dimensions match, later multiply each vector of matrix with vector given\n\n\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])",
+    "crumbs": [
+      "Matrix Vector Dot Product"
+    ]
+  },
+  {
+    "objectID": "matrix_vector_dot_product.html#below-is-a-simple-implementation-of-matrix-dot-vector",
+    "href": "matrix_vector_dot_product.html#below-is-a-simple-implementation-of-matrix-dot-vector",
+    "title": "Matrix Vector Dot Product",
+    "section": "",
+    "text": "check if the dimensions match, later multiply each vector of matrix with vector given\n\n\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])",
+    "crumbs": [
+      "Matrix Vector Dot Product"
+    ]
+  }
+]

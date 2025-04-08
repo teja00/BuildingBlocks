@@ -1,0 +1,2 @@
+[nbdev]
+BuildingBlocks = BuildingBlocks._modidx:d

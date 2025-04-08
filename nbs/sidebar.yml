@@ -1,0 +1,6 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_matrix_vector_dot_product.ipynb
+      - 01_transpose_of_matrix.ipynb

@@ -1,0 +1,17 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+settings.ini
+setup.py
+BuildingBlocks/__init__.py
+BuildingBlocks/_modidx.py
+BuildingBlocks/matrix_vector_dot_product.py
+BuildingBlocks/transpose_matrix.py
+BuildingBlocks.egg-info/PKG-INFO
+BuildingBlocks.egg-info/SOURCES.txt
+BuildingBlocks.egg-info/dependency_links.txt
+BuildingBlocks.egg-info/entry_points.txt
+BuildingBlocks.egg-info/not-zip-safe
+BuildingBlocks.egg-info/requires.txt
+BuildingBlocks.egg-info/top_level.txt
