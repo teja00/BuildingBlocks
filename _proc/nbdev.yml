@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "BuildingBlocks"
+  site-url: "https://teja00.github.io/BuildingBlocks"
+  description: "Creating Simple Implementation using Pytorch to work on Linear Algebra, Statistics using Nbdev"
+  repo-branch: main
+  repo-url: "https://github.com/teja00/BuildingBlocks"
