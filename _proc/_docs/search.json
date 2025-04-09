@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "BuildingBlocks",
     "section": "",
-    "text": "This file will become your README and also the index of your documentation.",
+    "text": "Install latest from the GitHub repository:\n$ pip install git+https://github.com/teja00/BuildingBlocks.git\nor from conda\n$ conda install -c teja00 BuildingBlocks\nor from pypi\n$ pip install BuildingBlocks",
     "crumbs": [
       "BuildingBlocks"
     ]
@@ -23,8 +23,8 @@
     "objectID": "index.html#usage",
     "href": "index.html#usage",
     "title": "BuildingBlocks",
-    "section": "Usage",
-    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/teja00/BuildingBlocks.git\nor from conda\n$ conda install -c teja00 BuildingBlocks\nor from pypi\n$ pip install BuildingBlocks",
+    "section": "",
+    "text": "Install latest from the GitHub repository:\n$ pip install git+https://github.com/teja00/BuildingBlocks.git\nor from conda\n$ conda install -c teja00 BuildingBlocks\nor from pypi\n$ pip install BuildingBlocks",
     "crumbs": [
       "BuildingBlocks"
     ]
@@ -44,7 +44,7 @@
     "href": "transpose_of_matrix.html",
     "title": "Transpose of a Matrix",
     "section": "",
-    "text": "def transpose_matrix(a: List[List[Union[int, float]]]) -&gt; List[List[Union[int, float]]]:\n    pass",
+    "text": "source\n\ntranspose_matrix\n\n transpose_matrix (a:List[List[Union[int,float]]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nmatrix a of size (n, m)\n\n\nReturns\ntyping.List[typing.List[typing.Union[int, float]]]\nmatrix of size (m, n)\n\n\n\n\n\nExported source\ndef transpose_matrix(a: List[List[Union[int, float]]] # matrix a of size (n, m)\n                     ) -&gt; List[List[Union[int, float]]]: # matrix of size (m, n) \n    n, m = len(a[0]), len(a)  # n = number of columns, m = number of rows\n    return [[a[i][j] for i in range(m)] for j in range(n)]",
     "crumbs": [
       "Transpose of a Matrix"
     ]
@@ -84,6 +84,26 @@
     "text": "Return a list where each element is the dot product of a row of ‘a’ with ‘b’. If the number of columns in ‘a’ does not match the length of ‘b’, return -1.\n\n\nsource\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nMatrix ’ a’ of size m x n\n\n\nb\ntyping.List[typing.Union[int, float]]\nVector ’ b’ of size n x 1\n\n\nReturns\ntyping.List[typing.Union[int, float]]\n-&gt; List[Union[int, float]] # Resulting vector of size m x 1:",
     "crumbs": [
       "Matrix Vector Dot Product"
+    ]
+  },
+  {
+    "objectID": "index.html#unit-test-suite-for-matrix-dot-product-vector-and-transpose-matrix",
+    "href": "index.html#unit-test-suite-for-matrix-dot-product-vector-and-transpose-matrix",
+    "title": "BuildingBlocks",
+    "section": "Unit Test Suite for Matrix dot product Vector and Transpose Matrix",
+    "text": "Unit Test Suite for Matrix dot product Vector and Transpose Matrix\n\n# --- Unit Test Suite ---\n\nclass TestMatrixFunctions(unittest.TestCase):\n    \n    # Tests for matrix_dot_vector\n    def test_dot_basic(self):\n        self.assertEqual(matrix_dot_vector([[1, 2], [2, 4]], [1, 2]), [5, 10])\n\n    def test_dot_zeros(self):\n        self.assertEqual(matrix_dot_vector([[0, 0], [0, 0]], [1, 2]), [0, 0])\n\n    def test_dot_identity(self):\n        self.assertEqual(matrix_dot_vector([[1, 0], [0, 1]], [7, 3]), [7, 3])\n\n    def test_dot_floats(self):\n        self.assertEqual(matrix_dot_vector([[1.5, -2], [-3, 4.5]], [2, 1]), [1.0, -1.5])\n\n    # Tests for transpose_matrix\n    def test_transpose_square(self):\n        self.assertEqual(transpose_matrix([[1, 2], [3, 4]]), [[1, 3], [2, 4]])\n\n    def test_transpose_rectangle(self):\n        self.assertEqual(transpose_matrix([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]])\n\n    def test_transpose_single_row(self):\n        self.assertEqual(transpose_matrix([[1, 2, 3]]), [[1], [2], [3]])\n\n    def test_transpose_single_column(self):\n        self.assertEqual(transpose_matrix([[1], [2], [3]]), [[1, 2, 3]])\n\n\nunittest.main(argv=[''], verbosity=2, exit=False)\n\ntest_dot_basic (__main__.TestMatrixFunctions) ... ok\ntest_dot_floats (__main__.TestMatrixFunctions) ... ok\ntest_dot_identity (__main__.TestMatrixFunctions) ... ok\ntest_dot_zeros (__main__.TestMatrixFunctions) ... ok\ntest_transpose_rectangle (__main__.TestMatrixFunctions) ... ok\ntest_transpose_single_column (__main__.TestMatrixFunctions) ... ok\ntest_transpose_single_row (__main__.TestMatrixFunctions) ... ok\ntest_transpose_square (__main__.TestMatrixFunctions) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.006s\n\nOK\n\n\n&lt;unittest.main.TestProgram&gt;",
+    "crumbs": [
+      "BuildingBlocks"
+    ]
+  },
+  {
+    "objectID": "index.html#testing",
+    "href": "index.html#testing",
+    "title": "BuildingBlocks",
+    "section": "Testing",
+    "text": "Testing\nImport the following to test out the functionalities\nfrom BuildingBlocks.matrix_vector_dot_product import *\nfrom BuildingBlocks.transpose_matrix import *\n\nUnit Test Suite for Matrix dot product Vector\n\nclass TestMatrixDotVector(unittest.TestCase):\n    \n    # Tests for matrix_dot_vector\n    def test_dot_basic(self):\n        self.assertEqual(matrix_dot_vector([[1, 2], [2, 4]], [1, 2]), [5, 10])\n\n    def test_dot_zeros(self):\n        self.assertEqual(matrix_dot_vector([[0, 0], [0, 0]], [1, 2]), [0, 0])\n\n    def test_dot_identity(self):\n        self.assertEqual(matrix_dot_vector([[1, 0], [0, 1]], [7, 3]), [7, 3])\n\n    def test_dot_floats(self):\n        self.assertEqual(matrix_dot_vector([[1.5, -2], [-3, 4.5]], [2, 1]), [1.0, -1.5])\n\n\n\nUnit TestSuite for Transpose Matrix\n\nclass TestMatrixTranspose(unittest.TestCase):\n    # Tests for transpose_matrix\n    def test_transpose_square(self):\n        self.assertEqual(transpose_matrix([[1, 2], [3, 4]]), [[1, 3], [2, 4]])\n\n    def test_transpose_rectangle(self):\n        self.assertEqual(transpose_matrix([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]])\n\n    def test_transpose_single_row(self):\n        self.assertEqual(transpose_matrix([[1, 2, 3]]), [[1], [2], [3]])\n\n    def test_transpose_single_column(self):\n        self.assertEqual(transpose_matrix([[1], [2], [3]]), [[1, 2, 3]])\n\n\nunittest.main(argv=[''], verbosity=2, exit=False)\n\ntest_dot_basic (__main__.TestMatrixDotVector) ... ok\ntest_dot_floats (__main__.TestMatrixDotVector) ... ok\ntest_dot_identity (__main__.TestMatrixDotVector) ... ok\ntest_dot_zeros (__main__.TestMatrixDotVector) ... ok\ntest_transpose_rectangle (__main__.TestMatrixTranspose) ... ok\ntest_transpose_single_column (__main__.TestMatrixTranspose) ... ok\ntest_transpose_single_row (__main__.TestMatrixTranspose) ... ok\ntest_transpose_square (__main__.TestMatrixTranspose) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.003s\n\nOK\n\n\n&lt;unittest.main.TestProgram&gt;",
+    "crumbs": [
+      "BuildingBlocks"
     ]
   }
 ]

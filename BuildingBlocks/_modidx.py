@@ -7,4 +7,5 @@ d = { 'settings': { 'branch': 'main',
                 'lib_path': 'BuildingBlocks'},
   'syms': { 'BuildingBlocks.matrix_vector_dot_product': { 'BuildingBlocks.matrix_vector_dot_product.matrix_dot_vector': ( 'matrix_vector_dot_product.html#matrix_dot_vector',
                                                                                                                           'BuildingBlocks/matrix_vector_dot_product.py')},
-            'BuildingBlocks.transpose_matrix': {}}}
+            'BuildingBlocks.transpose_matrix': { 'BuildingBlocks.transpose_matrix.transpose_matrix': ( 'transpose_of_matrix.html#transpose_matrix',
+                                                                                                       'BuildingBlocks/transpose_matrix.py')}}}
