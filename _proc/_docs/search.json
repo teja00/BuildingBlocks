@@ -34,7 +34,7 @@
     "href": "index.html#testing-matrix-vector-dot-product",
     "title": "BuildingBlocks",
     "section": "Testing Matrix-Vector Dot Product",
-    "text": "Testing Matrix-Vector Dot Product\n\nInitialize a Matrix and a Vector\na = [[1, 2], [2, 4]]\nb = [1, 2]\n\n::: {#cell-10 .cell}\n``` {.python .cell-code}\nassert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 10], \"Test case Passed\"\n\nassert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 11], \"Test case Failed\"\n\n2\n\n:::",
+    "text": "Testing Matrix-Vector Dot Product\n\nInitialize a Matrix and a Vector\n# pass test case\na = [[1, 2], [2, 4]]\nb = [1, 2]\nres = [5, 10]\n# fail test case\na = [[1, 2], [2, 4]]\nb = [1, 2]\nres = [5, 11]\n\n::: {#cell-10 .cell}\n``` {.python .cell-code}\nresult = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])\nassert result == [5, 10], \"Test failed\"\nprint(\"Test passed!\")\n\nTest passed!\n\n:::\n\nresult = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])\n# assert result == [5, 11], \"Test failed: Expected [5, 11], got \" + str(result)\n# print(\"Test passed!\")  # This won't run\n\n\n---------------------------------------------------------------------------\nAssertionError                            Traceback (most recent call last)\nCell In[11], line 2\n      1 result = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])\n----&gt; 2 assert result == [5, 11], \"Test failed: Expected [5, 11], got \" + str(result)\n      3 print(\"Test passed!\")  # This won't run\n\nAssertionError: Test failed: Expected [5, 11], got [5, 10]",
     "crumbs": [
       "BuildingBlocks"
     ]
@@ -44,7 +44,7 @@
     "href": "transpose_of_matrix.html",
     "title": "Transpose of a Matrix",
     "section": "",
-    "text": "def transpose_matrix(a: list[list[int|float]]) -&gt; list[list[int|float]]:\n    pass",
+    "text": "def transpose_matrix(a: List[List[Union[int, float]]]) -&gt; List[List[Union[int, float]]]:\n    pass",
     "crumbs": [
       "Transpose of a Matrix"
     ]
@@ -54,7 +54,7 @@
     "href": "transpose_of_matrix.html#simple-implemetation-on-how-to-transpose-a-matrix",
     "title": "Transpose of a Matrix",
     "section": "",
-    "text": "def transpose_matrix(a: list[list[int|float]]) -&gt; list[list[int|float]]:\n    pass",
+    "text": "def transpose_matrix(a: List[List[Union[int, float]]]) -&gt; List[List[Union[int, float]]]:\n    pass",
     "crumbs": [
       "Transpose of a Matrix"
     ]
@@ -71,7 +71,7 @@
     "href": "matrix_vector_dot_product.html",
     "title": "Matrix Vector Dot Product",
     "section": "",
-    "text": "check if the dimensions match, later multiply each vector of matrix with vector given\n\n\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])",
+    "text": "source\n\nmatrix_dot_vector\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nMatrix ’ a’ of size m x n\n\n\nb\ntyping.List[typing.Union[int, float]]\nVector ’ b’ of size n x 1\n\n\nReturns\ntyping.List[typing.Union[int, float]]\nResulting vector of size m x 1:\n\n\n\n\n\nExported source\ndef matrix_dot_vector(a: List[List[Union[int, float]]] # Matrix ' a' of size m x n\n                      , b: List[Union[int, float]] # Vector ' b' of size n x 1\n                      ) -&gt; List[Union[int, float]]: # Resulting vector of size m x 1:\n    if not all(len(row) == len(b) for row in a):\n        return -1\n    result = []\n    for row in a:\n        dot = sum(x * y for x, y in zip(row, b))\n        result.append(dot)\n    return result",
     "crumbs": [
       "Matrix Vector Dot Product"
     ]
@@ -81,7 +81,7 @@
     "href": "matrix_vector_dot_product.html#below-is-a-simple-implementation-of-matrix-dot-vector",
     "title": "Matrix Vector Dot Product",
     "section": "",
-    "text": "check if the dimensions match, later multiply each vector of matrix with vector given\n\n\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])",
+    "text": "Return a list where each element is the dot product of a row of ‘a’ with ‘b’. If the number of columns in ‘a’ does not match the length of ‘b’, return -1.\n\n\nsource\n\n\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nMatrix ’ a’ of size m x n\n\n\nb\ntyping.List[typing.Union[int, float]]\nVector ’ b’ of size n x 1\n\n\nReturns\ntyping.List[typing.Union[int, float]]\n-&gt; List[Union[int, float]] # Resulting vector of size m x 1:",
     "crumbs": [
       "Matrix Vector Dot Product"
     ]

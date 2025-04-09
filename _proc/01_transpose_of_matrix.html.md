@@ -13,7 +13,7 @@ title: Transpose of a Matrix
 
 ::: {#cell-3 .cell}
 ``` {.python .cell-code}
-def transpose_matrix(a: list[list[int|float]]) -> list[list[int|float]]:
+def transpose_matrix(a: List[List[Union[int, float]]]) -> List[List[Union[int, float]]]:
 	pass
 ```
 :::

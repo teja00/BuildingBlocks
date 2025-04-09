@@ -61,20 +61,54 @@ $ pip install BuildingBlocks
 ### Initialize a Matrix and a Vector
 
 ```python
+# pass test case
 a = [[1, 2], [2, 4]]
 b = [1, 2]
+res = [5, 10]
+# fail test case
+a = [[1, 2], [2, 4]]
+b = [1, 2]
+res = [5, 11]
 
 ::: {#cell-10 .cell}
 ``` {.python .cell-code}
-assert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 10], "Test case Passed"
-
-assert matrix_dot_vector([[1, 2], [2, 4]], [1, 2]) == [5, 11], "Test case Failed"
+result = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])
+assert result == [5, 10], "Test failed"
+print("Test passed!")
 ```
 
-::: {.cell-output .cell-output-display}
+::: {.cell-output .cell-output-stdout}
 ```
-2
+Test passed!
 ```
+:::
+:::
+
+
+::: {#cell-11 .cell}
+``` {.python .cell-code}
+result = matrix_dot_vector([[1, 2], [2, 4]], [1, 2])
+# assert result == [5, 11], "Test failed: Expected [5, 11], got " + str(result)
+# print("Test passed!")  # This won't run
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AssertionError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[11], line 2</span>
+<span class="ansi-green-fg ansi-bold">      1</span> result <span style="color:rgb(98,98,98)">=</span> matrix_dot_vector([[<span style="color:rgb(98,98,98)">1</span>, <span style="color:rgb(98,98,98)">2</span>], [<span style="color:rgb(98,98,98)">2</span>, <span style="color:rgb(98,98,98)">4</span>]], [<span style="color:rgb(98,98,98)">1</span>, <span style="color:rgb(98,98,98)">2</span>])
+<span class="ansi-green-fg">----&gt; 2</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> result <span style="color:rgb(98,98,98)">==</span> [<span style="color:rgb(98,98,98)">5</span>, <span style="color:rgb(98,98,98)">11</span>], <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Test failed: Expected [5, 11], got </span><span style="color:rgb(175,0,0)">"</span> <span style="color:rgb(98,98,98)">+</span> <span style="color:rgb(0,135,0)">str</span>(result)
+<span class="ansi-green-fg ansi-bold">      3</span> <span style="color:rgb(0,135,0)">print</span>(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Test passed!</span><span style="color:rgb(175,0,0)">"</span>)  <span style="font-style:italic;color:rgb(95,135,135)"># This won't run</span>
+
+<span class="ansi-red-fg">AssertionError</span>: Test failed: Expected [5, 11], got [5, 10]</pre>
+```
+
+:::
+
 :::
 :::
 
