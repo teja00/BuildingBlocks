@@ -33,6 +33,7 @@ Import the following to test out the functionalities
 ``` python
 from BuildingBlocks.matrix_vector_dot_product import *
 from BuildingBlocks.transpose_matrix import *
+from BuildingBlocks.reshape_matrix import *
 ```
 
 ### Unit Test Suite for Matrix dot product Vector
@@ -72,6 +73,21 @@ class TestMatrixTranspose(unittest.TestCase):
         self.assertEqual(transpose_matrix([[1], [2], [3]]), [[1, 2, 3]])
 ```
 
+### Unit TestSuite for Reshaping Matrix
+
+``` python
+class TestMatrixReshape(unittest.TestCase):
+    # Tests for transpose_matrix
+    def test_reshape_basic(self):
+        self.assertEqual(reshape_matrix([[1,2,3,4],[5,6,7,8]], (4, 2)), [[1, 2], [3, 4], [5, 6], [7, 8]])
+
+    def test_transpose_different_size(self):
+        self.assertEqual(reshape_matrix([[1, 2, 3, 4], [5, 6, 7, 8]], (1, 4)), [])
+
+    def test_transpose_same_size(self):
+        self.assertEqual(reshape_matrix([[1,2,3,4],[5,6,7,8]], (2, 4)), [[1, 2, 3, 4], [5, 6, 7, 8]])
+```
+
 ``` python
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
@@ -80,13 +96,16 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_dot_floats (__main__.TestMatrixDotVector) ... ok
     test_dot_identity (__main__.TestMatrixDotVector) ... ok
     test_dot_zeros (__main__.TestMatrixDotVector) ... ok
+    test_reshape_basic (__main__.TestMatrixReshape) ... ok
+    test_transpose_different_size (__main__.TestMatrixReshape) ... ok
+    test_transpose_same_size (__main__.TestMatrixReshape) ... ok
     test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
     test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
     test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
     test_transpose_square (__main__.TestMatrixTranspose) ... ok
 
     ----------------------------------------------------------------------
-    Ran 8 tests in 0.003s
+    Ran 11 tests in 0.294s
 
     OK
 

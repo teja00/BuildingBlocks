@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Creating Simple Implementation in Python to work on Linear Algebra, Statistics using Nbdev">
+<meta name="description" content="Python Function that computes the Reshaping of a matrix">
 
-<title>BuildingBlocks</title>
+<title>Reshape of a Matrix – BuildingBlocks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,11 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="BuildingBlocks">
-<meta property="og:description" content="Creating Simple Implementation in Python to work on Linear Algebra, Statistics using Nbdev">
+<meta property="og:title" content="Reshape of a Matrix – BuildingBlocks">
+<meta property="og:description" content="Python Function that computes the Reshaping of a matrix">
 <meta property="og:site_name" content="BuildingBlocks">
-<meta name="twitter:title" content="BuildingBlocks">
-<meta name="twitter:description" content="Creating Simple Implementation in Python to work on Linear Algebra, Statistics using Nbdev">
+<meta name="twitter:title" content="Reshape of a Matrix – BuildingBlocks">
+<meta name="twitter:description" content="Python Function that computes the Reshaping of a matrix">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">BuildingBlocks</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reshape_matrix.html">Reshape of a Matrix</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BuildingBlocks</span></a>
   </div>
 </li>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reshape_matrix.html" class="sidebar-item-text sidebar-link">
+  <a href="./reshape_matrix.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Reshape of a Matrix</span></a>
   </div>
 </li>
@@ -179,30 +179,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#usage" id="toc-usage" class="nav-link active" data-scroll-target="#usage">Usage</a>
+  <li><a href="#algorithm-explanation" id="toc-algorithm-explanation" class="nav-link active" data-scroll-target="#algorithm-explanation">Algorithm Explanation</a>
   <ul class="collapse">
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  </ul></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a>
-  <ul class="collapse">
-  <li><a href="#unit-test-suite-for-matrix-dot-product-vector" id="toc-unit-test-suite-for-matrix-dot-product-vector" class="nav-link" data-scroll-target="#unit-test-suite-for-matrix-dot-product-vector">Unit Test Suite for Matrix dot product Vector</a></li>
-  <li><a href="#unit-testsuite-for-transpose-matrix" id="toc-unit-testsuite-for-transpose-matrix" class="nav-link" data-scroll-target="#unit-testsuite-for-transpose-matrix">Unit TestSuite for Transpose Matrix</a></li>
-  <li><a href="#unit-testsuite-for-reshaping-matrix" id="toc-unit-testsuite-for-reshaping-matrix" class="nav-link" data-scroll-target="#unit-testsuite-for-reshaping-matrix">Unit TestSuite for Reshaping Matrix</a></li>
+  <li><a href="#reshape_matrix" id="toc-reshape_matrix" class="nav-link" data-scroll-target="#reshape_matrix">reshape_matrix</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="reshape_matrix.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BuildingBlocks</h1>
+<h1 class="title">Reshape of a Matrix</h1>
 </div>
 
 <div>
   <div class="description">
-    Creating Simple Implementation in Python to work on Linear Algebra, Statistics using Nbdev
+    Python Function that computes the Reshaping of a matrix
   </div>
 </div>
 
@@ -220,98 +214,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<section id="installation" class="level3">
-<h3 class="anchored" data-anchor-id="installation">Installation</h3>
-<p>Install latest from the GitHub <a href="https://github.com/teja00/BuildingBlocks">repository</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install git+https://github.com/teja00/BuildingBlocks.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://anaconda.org/teja00/BuildingBlocks">conda</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> conda install <span class="at">-c</span> teja00 BuildingBlocks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>or from <a href="https://pypi.org/project/BuildingBlocks/">pypi</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pip install BuildingBlocks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="testing" class="level2">
-<h2 class="anchored" data-anchor-id="testing">Testing</h2>
-<p>Import the following to test out the functionalities</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.matrix_vector_dot_product <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.transpose_matrix <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.reshape_matrix <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="unit-test-suite-for-matrix-dot-product-vector" class="level3">
-<h3 class="anchored" data-anchor-id="unit-test-suite-for-matrix-dot-product-vector">Unit Test Suite for Matrix dot product Vector</h3>
-<div id="cell-8" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestMatrixDotVector(unittest.TestCase):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tests for matrix_dot_vector</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_dot_basic(<span class="va">self</span>):</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_dot_vector([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">4</span>]], [<span class="dv">1</span>, <span class="dv">2</span>]), [<span class="dv">5</span>, <span class="dv">10</span>])</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_dot_zeros(<span class="va">self</span>):</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_dot_vector([[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]], [<span class="dv">1</span>, <span class="dv">2</span>]), [<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_dot_identity(<span class="va">self</span>):</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_dot_vector([[<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>]], [<span class="dv">7</span>, <span class="dv">3</span>]), [<span class="dv">7</span>, <span class="dv">3</span>])</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_dot_floats(<span class="va">self</span>):</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_dot_vector([[<span class="fl">1.5</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="fl">4.5</span>]], [<span class="dv">2</span>, <span class="dv">1</span>]), [<span class="fl">1.0</span>, <span class="op">-</span><span class="fl">1.5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="unit-testsuite-for-transpose-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="unit-testsuite-for-transpose-matrix">Unit TestSuite for Transpose Matrix</h3>
-<div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestMatrixTranspose(unittest.TestCase):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tests for transpose_matrix</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_square(<span class="va">self</span>):</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(transpose_matrix([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]), [[<span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">4</span>]])</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_rectangle(<span class="va">self</span>):</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(transpose_matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]]), [[<span class="dv">1</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">5</span>], [<span class="dv">3</span>, <span class="dv">6</span>]])</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_single_row(<span class="va">self</span>):</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(transpose_matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]]), [[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>]])</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_single_column(<span class="va">self</span>):</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(transpose_matrix([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>]]), [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="unit-testsuite-for-reshaping-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="unit-testsuite-for-reshaping-matrix">Unit TestSuite for Reshaping Matrix</h3>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestMatrixReshape(unittest.TestCase):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tests for transpose_matrix</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_reshape_basic(<span class="va">self</span>):</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(reshape_matrix([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>]], (<span class="dv">4</span>, <span class="dv">2</span>)), [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_different_size(<span class="va">self</span>):</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(reshape_matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]], (<span class="dv">1</span>, <span class="dv">4</span>)), [])</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_transpose_same_size(<span class="va">self</span>):</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(reshape_matrix([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],[<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>]], (<span class="dv">2</span>, <span class="dv">4</span>)), [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-13" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>unittest.main(argv<span class="op">=</span>[<span class="st">''</span>], verbosity<span class="op">=</span><span class="dv">2</span>, exit<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>test_dot_basic (__main__.TestMatrixDotVector) ... ok
-test_dot_floats (__main__.TestMatrixDotVector) ... ok
-test_dot_identity (__main__.TestMatrixDotVector) ... ok
-test_dot_zeros (__main__.TestMatrixDotVector) ... ok
-test_reshape_basic (__main__.TestMatrixReshape) ... ok
-test_transpose_different_size (__main__.TestMatrixReshape) ... ok
-test_transpose_same_size (__main__.TestMatrixReshape) ... ok
-test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
-test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
-test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
-test_transpose_square (__main__.TestMatrixTranspose) ... ok
-
-----------------------------------------------------------------------
-Ran 11 tests in 0.294s
-
-OK</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;unittest.main.TestProgram&gt;</code></pre>
-</div>
+<section id="algorithm-explanation" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-explanation">Algorithm Explanation</h2>
+<p>the line of code would flatten the matrix of size m by n =&gt; which would have a size m*n</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flat <span class="op">=</span> np.array(a).flatten()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The below line of code is a list comprehension, and we are picking blocks of cols <br> let’s say cols = 10<br> i.e from <br> [0, 10] <br> [10, 20] <br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>reshaped_matrix <span class="op">=</span> [</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        flat[i <span class="op">*</span> new_shape[<span class="dv">1</span>] : (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> new_shape[<span class="dv">1</span>]].tolist()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(new_shape[<span class="dv">0</span>])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<section id="reshape_matrix" class="level3">
+<h3 class="anchored" data-anchor-id="reshape_matrix">reshape_matrix</h3>
+<blockquote class="blockquote">
+<pre><code> reshape_matrix (a:List[List[Union[int,float]]], new_shape:tuple)</code></pre>
+</blockquote>
+<div id="cell-4" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reshape_matrix( a: List[List[Union[<span class="bu">int</span>, <span class="bu">float</span>]]],</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                    new_shape: <span class="bu">tuple</span>[<span class="bu">int</span>, <span class="bu">int</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]]:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    flat <span class="op">=</span> np.array(a).flatten()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Validate the reshape is possible</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(flat) <span class="op">!=</span> new_shape[<span class="dv">0</span>] <span class="op">*</span> new_shape[<span class="dv">1</span>]:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> []</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Manually reshape using slicing</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    reshaped_matrix <span class="op">=</span> [</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        flat[i <span class="op">*</span> new_shape[<span class="dv">1</span>] : (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> new_shape[<span class="dv">1</span>]].tolist()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(new_shape[<span class="dv">0</span>])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> reshaped_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 
