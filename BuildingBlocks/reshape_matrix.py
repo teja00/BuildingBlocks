@@ -10,9 +10,9 @@ from typing import List, Union
 import numpy as np
 
 # %% ../nbs/02_reshape_matrix.ipynb 4
-def reshape_matrix( a: List[List[Union[int, float]]],
-                    new_shape: tuple[int, int]
-                    ) -> list[list[Union[int,float]]]:
+def reshape_matrix( a: List[List[Union[int, float]]], # matrix a of size (m, n) of int or float
+                    new_shape: tuple[int, int] # new shape tuple to reshape into (a, b)
+                    ) -> list[list[Union[int,float]]]: # output matrix of shape (a, b)
     flat = np.array(a).flatten()
 
     # Validate the reshape is possible
