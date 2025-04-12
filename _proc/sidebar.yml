@@ -5,3 +5,4 @@ website:
       - 00_matrix_vector_dot_product.ipynb
       - 01_transpose_of_matrix.ipynb
       - 02_reshape_matrix.ipynb
+      - 03_mean_by_row_column.ipynb

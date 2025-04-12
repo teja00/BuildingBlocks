@@ -34,6 +34,7 @@ Import the following to test out the functionalities
 from BuildingBlocks.matrix_vector_dot_product import *
 from BuildingBlocks.transpose_matrix import *
 from BuildingBlocks.reshape_matrix import *
+from BuildingBlocks.mean_row_column import *
 ```
 
 ### Unit Test Suite for Matrix dot product Vector
@@ -88,6 +89,15 @@ class TestMatrixReshape(unittest.TestCase):
         self.assertEqual(reshape_matrix([[1,2,3,4],[5,6,7,8]], (2, 4)), [[1, 2, 3, 4], [5, 6, 7, 8]])
 ```
 
+### Unit TestSuite for Mean by Row or column
+
+``` python
+class TestMeanMatrix(unittest.TestCase):
+    # Tests for transpose_matrix
+    def test_mean_basic(self):
+        self.assertEqual(calculate_matrix_mean([[1, 2, 3], [4, 5, 6], [7, 8, 9]],'column'), [4.0, 5.0, 6.0])
+```
+
 ``` python
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
@@ -103,9 +113,10 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
     test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
     test_transpose_square (__main__.TestMatrixTranspose) ... ok
+    test_mean_basic (__main__.TestMeanMatrix) ... ok
 
     ----------------------------------------------------------------------
-    Ran 11 tests in 0.294s
+    Ran 12 tests in 0.008s
 
     OK
 

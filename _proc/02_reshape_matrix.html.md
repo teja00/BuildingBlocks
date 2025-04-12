@@ -30,16 +30,24 @@ reshaped_matrix = [
 
 ---
 
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/reshape_matrix.py#L13){target="_blank" style="float:right; font-size:smaller"}
+
 ### reshape_matrix
 
 >      reshape_matrix (a:List[List[Union[int,float]]], new_shape:tuple)
 
+|    | **Type** | **Details** |
+| -- | -------- | ----------- |
+| a | typing.List[typing.List[typing.Union[int, float]]] | matrix a of size (m, n) of int or float |
+| new_shape | tuple | new shape tuple to reshape into (a, b) |
+| **Returns** | **list** | **output matrix of shape (a, b)** |
+
 
 ::: {#cell-4 .cell}
 ``` {.python .cell-code code-fold="show" code-summary="Exported source"}
-def reshape_matrix( a: List[List[Union[int, float]]],
-                    new_shape: tuple[int, int]
-                    ) -> list[list[Union[int,float]]]:
+def reshape_matrix( a: List[List[Union[int, float]]], # matrix a of size (m, n) of int or float
+                    new_shape: tuple[int, int] # new shape tuple to reshape into (a, b)
+                    ) -> list[list[Union[int,float]]]: # output matrix of shape (a, b)
     flat = np.array(a).flatten()
 
     # Validate the reshape is possible
