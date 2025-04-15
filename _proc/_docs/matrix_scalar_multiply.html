@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Fill in a module description here">
+<meta name="description" content="different implementation of Matrix and scalar multiplication">
 
-<title>core – BuildingBlocks</title>
+<title>Matrix Scalar Multiply – BuildingBlocks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -70,11 +104,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="core – BuildingBlocks">
-<meta property="og:description" content="Fill in a module description here">
+<meta property="og:title" content="Matrix Scalar Multiply – BuildingBlocks">
+<meta property="og:description" content="different implementation of Matrix and scalar multiplication">
 <meta property="og:site_name" content="BuildingBlocks">
-<meta name="twitter:title" content="core – BuildingBlocks">
-<meta name="twitter:description" content="Fill in a module description here">
+<meta name="twitter:title" content="Matrix Scalar Multiply – BuildingBlocks">
+<meta name="twitter:description" content="different implementation of Matrix and scalar multiplication">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -99,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">core</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./matrix_scalar_multiply.html">Matrix Scalar Multiply</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -129,6 +163,24 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Transpose of a Matrix</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reshape_matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reshape of a Matrix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mean_by_row_column.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mean by Row or Column</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix_scalar_multiply.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Matrix Scalar Multiply</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -139,21 +191,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#foo" id="toc-foo" class="nav-link active" data-scroll-target="#foo">foo</a></li>
+  <li><a href="#rudimentary-way-of-doing-matrix-scalar-multiplication" id="toc-rudimentary-way-of-doing-matrix-scalar-multiplication" class="nav-link active" data-scroll-target="#rudimentary-way-of-doing-matrix-scalar-multiplication">Rudimentary way of doing matrix scalar multiplication</a>
+  <ul class="collapse">
+  <li><a href="#matrix_scalar_multiply" id="toc-matrix_scalar_multiply" class="nav-link" data-scroll-target="#matrix_scalar_multiply">matrix_scalar_multiply</a></li>
+  </ul></li>
+  <li><a href="#matrix-scalar-multiplication-using-numpy" id="toc-matrix-scalar-multiplication-using-numpy" class="nav-link" data-scroll-target="#matrix-scalar-multiplication-using-numpy">Matrix Scalar multiplication using numpy</a>
+  <ul class="collapse">
+  <li><a href="#matrix_scalar_multiply_numpy" id="toc-matrix_scalar_multiply_numpy" class="nav-link" data-scroll-target="#matrix_scalar_multiply_numpy">matrix_scalar_multiply_numpy</a></li>
+  </ul></li>
+  <li><a href="#matrix-scalar-multiplication-using-torch" id="toc-matrix-scalar-multiplication-using-torch" class="nav-link" data-scroll-target="#matrix-scalar-multiplication-using-torch">Matrix Scalar multiplication using torch</a>
+  <ul class="collapse">
+  <li><a href="#matrix_scalar_multiply_torch" id="toc-matrix_scalar_multiply_torch" class="nav-link" data-scroll-target="#matrix_scalar_multiply_torch">matrix_scalar_multiply_torch</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="core.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_scalar_multiply.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">core</h1>
+<h1 class="title">Matrix Scalar Multiply</h1>
 </div>
 
 <div>
   <div class="description">
-    Fill in a module description here
+    different implementation of Matrix and scalar multiplication
   </div>
 </div>
 
@@ -171,14 +234,149 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="rudimentary-way-of-doing-matrix-scalar-multiplication" class="level2">
+<h2 class="anchored" data-anchor-id="rudimentary-way-of-doing-matrix-scalar-multiplication">Rudimentary way of doing matrix scalar multiplication</h2>
 <hr>
-<section id="foo" class="level3">
-<h3 class="anchored" data-anchor-id="foo">foo</h3>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_scalar_multiply.py#L14" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="matrix_scalar_multiply" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_scalar_multiply">matrix_scalar_multiply</h3>
 <blockquote class="blockquote">
-<pre><code> foo ()</code></pre>
+<pre><code> matrix_scalar_multiply (matrix:list, scalar:Union[int,float])</code></pre>
 </blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>matrix</td>
+<td>list</td>
+<td>Matrix of size m,n</td>
+</tr>
+<tr class="even">
+<td>scalar</td>
+<td>typing.Union[int, float]</td>
+<td>scalar int or float</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>list</strong></td>
+<td><strong>Matrix of size m, n</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-4" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_scalar_multiply( matrix: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]], <span class="co"># Matrix of size m,n</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                            scalar: Union[<span class="bu">int</span>,<span class="bu">float</span>] <span class="co"># scalar int or float</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                           ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]]: <span class="co"># Matrix of size m, n</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    matrix <span class="op">=</span> np.array(matrix)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> [(row <span class="op">*</span> scalar).tolist() <span class="cf">for</span> row <span class="kw">in</span> matrix]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="matrix-scalar-multiplication-using-numpy" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-scalar-multiplication-using-numpy">Matrix Scalar multiplication using numpy</h2>
+<hr>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_scalar_multiply.py#L22" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="matrix_scalar_multiply_numpy" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_scalar_multiply_numpy">matrix_scalar_multiply_numpy</h3>
+<blockquote class="blockquote">
+<pre><code> matrix_scalar_multiply_numpy (matrix:list, scalar:Union[int,float])</code></pre>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>matrix</td>
+<td>list</td>
+<td>Matrix of size m,n</td>
+</tr>
+<tr class="even">
+<td>scalar</td>
+<td>typing.Union[int, float]</td>
+<td>scalar int or float</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>list</strong></td>
+<td><strong>Matrix of size m, n</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-7" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_scalar_multiply_numpy( matrix: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]], <span class="co"># Matrix of size m,n</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                            scalar: Union[<span class="bu">int</span>,<span class="bu">float</span>] <span class="co"># scalar int or float</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                           ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]]: <span class="co"># Matrix of size m, n</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> np.multiply(matrix, scalar)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="matrix-scalar-multiplication-using-torch" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-scalar-multiplication-using-torch">Matrix Scalar multiplication using torch</h2>
+<hr>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_scalar_multiply.py#L29" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="matrix_scalar_multiply_torch" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_scalar_multiply_torch">matrix_scalar_multiply_torch</h3>
+<blockquote class="blockquote">
+<pre><code> matrix_scalar_multiply_torch (matrix:list, scalar:Union[int,float])</code></pre>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>matrix</td>
+<td>list</td>
+<td>Matrix of size m,n</td>
+</tr>
+<tr class="even">
+<td>scalar</td>
+<td>typing.Union[int, float]</td>
+<td>scalar int or float</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>list</strong></td>
+<td><strong>Matrix of size m, n</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-10" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_scalar_multiply_torch( matrix: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]], <span class="co"># Matrix of size m,n</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                            scalar: Union[<span class="bu">int</span>,<span class="bu">float</span>] <span class="co"># scalar int or float</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>,<span class="bu">float</span>]]]: <span class="co"># Matrix of size m, n</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> torch.mul(matrix, scalar)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -175,6 +175,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Mean by Row or Column</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix_scalar_multiply.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix Scalar Multiply</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -195,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#unit-testsuite-for-transpose-matrix" id="toc-unit-testsuite-for-transpose-matrix" class="nav-link" data-scroll-target="#unit-testsuite-for-transpose-matrix">Unit TestSuite for Transpose Matrix</a></li>
   <li><a href="#unit-testsuite-for-reshaping-matrix" id="toc-unit-testsuite-for-reshaping-matrix" class="nav-link" data-scroll-target="#unit-testsuite-for-reshaping-matrix">Unit TestSuite for Reshaping Matrix</a></li>
   <li><a href="#unit-testsuite-for-mean-by-row-or-column" id="toc-unit-testsuite-for-mean-by-row-or-column" class="nav-link" data-scroll-target="#unit-testsuite-for-mean-by-row-or-column">Unit TestSuite for Mean by Row or column</a></li>
+  <li><a href="#unit-testsuite-for-matrix-scalar-multiplication" id="toc-unit-testsuite-for-matrix-scalar-multiplication" class="nav-link" data-scroll-target="#unit-testsuite-for-matrix-scalar-multiplication">Unit TestSuite for Matrix Scalar Multiplication</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
@@ -245,7 +252,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.matrix_vector_dot_product <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.transpose_matrix <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.reshape_matrix <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.mean_row_column <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.mean_row_column <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> BuildingBlocks.matrix_scalar_multiply <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="unit-test-suite-for-matrix-dot-product-vector" class="level3">
 <h3 class="anchored" data-anchor-id="unit-test-suite-for-matrix-dot-product-vector">Unit Test Suite for Matrix dot product Vector</h3>
 <div id="cell-8" class="cell">
@@ -306,13 +314,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mean_basic(<span class="va">self</span>):</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(calculate_matrix_mean([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]],<span class="st">'column'</span>), [<span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">6.0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-15" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>unittest.main(argv<span class="op">=</span>[<span class="st">''</span>], verbosity<span class="op">=</span><span class="dv">2</span>, exit<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="unit-testsuite-for-matrix-scalar-multiplication" class="level3">
+<h3 class="anchored" data-anchor-id="unit-testsuite-for-matrix-scalar-multiplication">Unit TestSuite for Matrix Scalar Multiplication</h3>
+<div id="cell-16" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestMatrixMulScalar(unittest.TestCase):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tests for transpose_matrix</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_basic(<span class="va">self</span>):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="dv">2</span>), [[<span class="dv">2</span>, <span class="dv">4</span>], [<span class="dv">6</span>, <span class="dv">8</span>]])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_negative(<span class="va">self</span>):</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">4</span>]], <span class="op">-</span><span class="dv">1</span>), [[<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]])</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_zero(<span class="va">self</span>):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="dv">0</span>), [[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_float(<span class="va">self</span>):</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="fl">1.5</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="fl">4.5</span>]], <span class="fl">2.0</span>), [[<span class="fl">3.0</span>, <span class="op">-</span><span class="fl">4.0</span>], [<span class="op">-</span><span class="fl">6.0</span>, <span class="fl">9.0</span>]])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity(<span class="va">self</span>):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="dv">1</span>), [[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_float(<span class="va">self</span>):</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="fl">1.5</span>, <span class="fl">2.5</span>], [<span class="fl">3.5</span>, <span class="fl">4.5</span>]], <span class="fl">1.0</span>), [[<span class="fl">1.5</span>, <span class="fl">2.5</span>], [<span class="fl">3.5</span>, <span class="fl">4.5</span>]])</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_negative(<span class="va">self</span>):</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="op">-</span><span class="dv">1</span>), [[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]])</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_zero(<span class="va">self</span>):</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="dv">0</span>), [[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]])</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_float_zero(<span class="va">self</span>):</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="fl">1.5</span>, <span class="fl">2.5</span>], [<span class="fl">3.5</span>, <span class="fl">4.5</span>]], <span class="fl">0.0</span>), [[<span class="fl">0.0</span>, <span class="fl">0.0</span>], [<span class="fl">0.0</span>, <span class="fl">0.0</span>]])</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_negative_float(<span class="va">self</span>):</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="fl">1.5</span>, <span class="fl">2.5</span>], [<span class="fl">3.5</span>, <span class="fl">4.5</span>]], <span class="op">-</span><span class="fl">1.0</span>), [[<span class="op">-</span><span class="fl">1.5</span>, <span class="op">-</span><span class="fl">2.5</span>], [<span class="op">-</span><span class="fl">3.5</span>, <span class="op">-</span><span class="fl">4.5</span>]])</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_negative_zero(<span class="va">self</span>):</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], <span class="op">-</span><span class="dv">0</span>), [[<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>]])</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_mul_scalar_identity_float_zero(<span class="va">self</span>):</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.assertEqual(matrix_scalar_multiply([[<span class="fl">1.5</span>, <span class="fl">2.5</span>], [<span class="fl">3.5</span>, <span class="fl">4.5</span>]], <span class="op">-</span><span class="fl">0.0</span>), [[<span class="fl">0.0</span>, <span class="fl">0.0</span>], [<span class="fl">0.0</span>, <span class="fl">0.0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>unittest.main(argv<span class="op">=</span>[<span class="st">''</span>], verbosity<span class="op">=</span><span class="dv">2</span>, exit<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>test_dot_basic (__main__.TestMatrixDotVector) ... ok
 test_dot_floats (__main__.TestMatrixDotVector) ... ok
 test_dot_identity (__main__.TestMatrixDotVector) ... ok
 test_dot_zeros (__main__.TestMatrixDotVector) ... ok
+test_mul_scalar_basic (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_float (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_float (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_float_zero (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_negative (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_negative_float (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_negative_zero (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_identity_zero (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_negative (__main__.TestMatrixMulScalar) ... ok
+test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
 test_reshape_basic (__main__.TestMatrixReshape) ... ok
 test_transpose_different_size (__main__.TestMatrixReshape) ... ok
 test_transpose_same_size (__main__.TestMatrixReshape) ... ok
@@ -323,7 +373,7 @@ test_transpose_square (__main__.TestMatrixTranspose) ... ok
 test_mean_basic (__main__.TestMeanMatrix) ... ok
 
 ----------------------------------------------------------------------
-Ran 12 tests in 0.008s
+Ran 23 tests in 0.034s
 
 OK</code></pre>
 </div>

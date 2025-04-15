@@ -35,6 +35,7 @@ from BuildingBlocks.matrix_vector_dot_product import *
 from BuildingBlocks.transpose_matrix import *
 from BuildingBlocks.reshape_matrix import *
 from BuildingBlocks.mean_row_column import *
+from BuildingBlocks.matrix_scalar_multiply import *
 ```
 
 ### Unit Test Suite for Matrix dot product Vector
@@ -98,6 +99,37 @@ class TestMeanMatrix(unittest.TestCase):
         self.assertEqual(calculate_matrix_mean([[1, 2, 3], [4, 5, 6], [7, 8, 9]],'column'), [4.0, 5.0, 6.0])
 ```
 
+### Unit TestSuite for Matrix Scalar Multiplication
+
+``` python
+class TestMatrixMulScalar(unittest.TestCase):
+    # Tests for transpose_matrix
+    def test_mul_scalar_basic(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 2), [[2, 4], [6, 8]])
+    def test_mul_scalar_negative(self):
+        self.assertEqual(matrix_scalar_multiply([[1, -2], [-3, 4]], -1), [[-1, 2], [3, -4]])
+    def test_mul_scalar_zero(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 0), [[0, 0], [0, 0]])
+    def test_mul_scalar_float(self):
+        self.assertEqual(matrix_scalar_multiply([[1.5, -2], [-3, 4.5]], 2.0), [[3.0, -4.0], [-6.0, 9.0]])
+    def test_mul_scalar_identity(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 1), [[1, 2], [3, 4]])
+    def test_mul_scalar_identity_float(self):
+        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], 1.0), [[1.5, 2.5], [3.5, 4.5]])
+    def test_mul_scalar_identity_negative(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], -1), [[-1, -2], [-3, -4]])
+    def test_mul_scalar_identity_zero(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 0), [[0, 0], [0, 0]])
+    def test_mul_scalar_identity_float_zero(self):
+        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], 0.0), [[0.0, 0.0], [0.0, 0.0]])
+    def test_mul_scalar_identity_negative_float(self):
+        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], -1.0), [[-1.5, -2.5], [-3.5, -4.5]])
+    def test_mul_scalar_identity_negative_zero(self):
+        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], -0), [[0, 0], [0, 0]])
+    def test_mul_scalar_identity_float_zero(self):
+        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], -0.0), [[0.0, 0.0], [0.0, 0.0]])
+```
+
 ``` python
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
@@ -106,6 +138,17 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_dot_floats (__main__.TestMatrixDotVector) ... ok
     test_dot_identity (__main__.TestMatrixDotVector) ... ok
     test_dot_zeros (__main__.TestMatrixDotVector) ... ok
+    test_mul_scalar_basic (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_float (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_float (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_float_zero (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_negative (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_negative_float (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_negative_zero (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_identity_zero (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_negative (__main__.TestMatrixMulScalar) ... ok
+    test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
     test_reshape_basic (__main__.TestMatrixReshape) ... ok
     test_transpose_different_size (__main__.TestMatrixReshape) ... ok
     test_transpose_same_size (__main__.TestMatrixReshape) ... ok
@@ -116,7 +159,7 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_mean_basic (__main__.TestMeanMatrix) ... ok
 
     ----------------------------------------------------------------------
-    Ran 12 tests in 0.008s
+    Ran 23 tests in 0.034s
 
     OK
 

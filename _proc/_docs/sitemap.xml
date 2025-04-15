@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/index.html</loc>
-    <lastmod>2025-04-12T03:39:24.987Z</lastmod>
-  </url>
-  <url>
-    <loc>https://teja00.github.io/BuildingBlocks/transpose_of_matrix.html</loc>
-    <lastmod>2025-04-09T23:39:51.486Z</lastmod>
-  </url>
-  <url>
-    <loc>https://teja00.github.io/BuildingBlocks/core.html</loc>
-    <lastmod>2025-04-08T05:09:06.970Z</lastmod>
-  </url>
-  <url>
-    <loc>https://teja00.github.io/BuildingBlocks/matrix_vector_dot_product.html</loc>
-    <lastmod>2025-04-09T22:54:13.441Z</lastmod>
-  </url>
-  <url>
-    <loc>https://teja00.github.io/BuildingBlocks/reshape_matrix.html</loc>
-    <lastmod>2025-04-12T03:39:24.978Z</lastmod>
+    <lastmod>2025-04-15T00:26:00.183Z</lastmod>
   </url>
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/mean_by_row_column.html</loc>
-    <lastmod>2025-04-12T03:39:24.977Z</lastmod>
+    <lastmod>2025-04-15T00:26:00.157Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/transpose_of_matrix.html</loc>
+    <lastmod>2025-04-15T00:26:00.145Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/reshape_matrix.html</loc>
+    <lastmod>2025-04-15T00:26:00.144Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/matrix_vector_dot_product.html</loc>
+    <lastmod>2025-04-15T00:26:00.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/matrix_scalar_multiply.html</loc>
+    <lastmod>2025-04-15T00:26:01.035Z</lastmod>
   </url>
 </urlset>
