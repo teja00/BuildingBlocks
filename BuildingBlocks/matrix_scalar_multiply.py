@@ -6,7 +6,7 @@
 __all__ = ['matrix_scalar_multiply', 'matrix_scalar_multiply_numpy', 'matrix_scalar_multiply_torch']
 
 # %% ../nbs/04_matrix_scalar_multiply.ipynb 2
-from typing import List, Union
+from typing import Union
 import numpy as np
 import torch
 

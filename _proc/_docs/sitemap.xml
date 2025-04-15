@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/index.html</loc>
-    <lastmod>2025-04-15T00:26:00.183Z</lastmod>
+    <lastmod>2025-04-15T01:16:18.084Z</lastmod>
   </url>
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/mean_by_row_column.html</loc>
@@ -23,5 +23,9 @@
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/matrix_scalar_multiply.html</loc>
     <lastmod>2025-04-15T00:26:01.035Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/eigen_value_matrix.html</loc>
+    <lastmod>2025-04-15T01:19:01.188Z</lastmod>
   </url>
 </urlset>

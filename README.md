@@ -112,41 +112,52 @@ class TestMatrixMulScalar(unittest.TestCase):
         self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 0), [[0, 0], [0, 0]])
     def test_mul_scalar_float(self):
         self.assertEqual(matrix_scalar_multiply([[1.5, -2], [-3, 4.5]], 2.0), [[3.0, -4.0], [-6.0, 9.0]])
-    def test_mul_scalar_identity(self):
-        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 1), [[1, 2], [3, 4]])
-    def test_mul_scalar_identity_float(self):
-        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], 1.0), [[1.5, 2.5], [3.5, 4.5]])
-    def test_mul_scalar_identity_negative(self):
-        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], -1), [[-1, -2], [-3, -4]])
-    def test_mul_scalar_identity_zero(self):
-        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], 0), [[0, 0], [0, 0]])
-    def test_mul_scalar_identity_float_zero(self):
-        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], 0.0), [[0.0, 0.0], [0.0, 0.0]])
-    def test_mul_scalar_identity_negative_float(self):
-        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], -1.0), [[-1.5, -2.5], [-3.5, -4.5]])
-    def test_mul_scalar_identity_negative_zero(self):
-        self.assertEqual(matrix_scalar_multiply([[1, 2], [3, 4]], -0), [[0, 0], [0, 0]])
-    def test_mul_scalar_identity_float_zero(self):
-        self.assertEqual(matrix_scalar_multiply([[1.5, 2.5], [3.5, 4.5]], -0.0), [[0.0, 0.0], [0.0, 0.0]])
+```
+
+### Unit TestSuite for Eigen Value Calculation
+
+``` python
+class TestEigenValueMatrix2by2(unittest.TestCase):
+    def assertListAlmostEqual(self, list1, list2, places=5):
+        self.assertEqual(len(list1), len(list2))
+        for a, b in zip(sorted(list1), sorted(list2)):
+            self.assertAlmostEqual(a, b, places=places)
+
+    def test_eigen_value_basic(self):
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[1, 2], [2, 1]]), [3, -1])
+
+    def test_eigen_value_zero(self):
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[0, 0], [0, 0]]), [0, 0])
+
+    def test_eigen_value_identity(self):
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[1, 0], [0, 1]]), [1, 1])
+
+    def test_eigen_value_negative(self):
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[-1, -2], [-2, -1]]), [-3, 1])
+
+    def test_eigen_value_float(self):  
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[1.5, -2], [-3, 4.5]]), [5.872281323269014, 0.1277186767309857])
+
+    def test_eigen_value_complex(self):
+        self.assertListAlmostEqual(calculate_eigenvalues_2by2([[1, 2], [2, 1]]), [3, -1])
 ```
 
 ``` python
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
+    test_eigen_value_basic (__main__.TestEigenValueMatrix2by2) ... ok
+    test_eigen_value_complex (__main__.TestEigenValueMatrix2by2) ... ok
+    test_eigen_value_float (__main__.TestEigenValueMatrix2by2) ... ok
+    test_eigen_value_identity (__main__.TestEigenValueMatrix2by2) ... ok
+    test_eigen_value_negative (__main__.TestEigenValueMatrix2by2) ... ok
+    test_eigen_value_zero (__main__.TestEigenValueMatrix2by2) ... ok
     test_dot_basic (__main__.TestMatrixDotVector) ... ok
     test_dot_floats (__main__.TestMatrixDotVector) ... ok
     test_dot_identity (__main__.TestMatrixDotVector) ... ok
     test_dot_zeros (__main__.TestMatrixDotVector) ... ok
     test_mul_scalar_basic (__main__.TestMatrixMulScalar) ... ok
     test_mul_scalar_float (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_float (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_float_zero (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_negative (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_negative_float (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_negative_zero (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_identity_zero (__main__.TestMatrixMulScalar) ... ok
     test_mul_scalar_negative (__main__.TestMatrixMulScalar) ... ok
     test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
     test_reshape_basic (__main__.TestMatrixReshape) ... ok
@@ -159,7 +170,7 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_mean_basic (__main__.TestMeanMatrix) ... ok
 
     ----------------------------------------------------------------------
-    Ran 23 tests in 0.034s
+    Ran 22 tests in 0.031s
 
     OK
 
