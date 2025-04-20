@@ -134,9 +134,19 @@
     "href": "eigen_value_matrix.html#eigen-value-using-numpy-library-for-an-n-x-n-matrix",
     "title": "Eigen Value of Matrix",
     "section": "Eigen Value using numpy library for an N x N Matrix",
-    "text": "Eigen Value using numpy library for an N x N Matrix\n\nsource\n\ncalculate_eigenvalues\n\n calculate_eigenvalues (matrix:list)\n\n\n\n\n\nType\nDetails\n\n\n\n\nmatrix\nlist\nmatrix of size 2 x 2\n\n\nReturns\nlist\nresult of size n x 1\n\n\n\n\n\nExported source\ndef calculate_eigenvalues(matrix: list[list[Union[float,int]]] # matrix of size 2 x 2\n                          ) -&gt; list[float]: # result of size n x 1\n    np_matrix = np.array(matrix)\n    if np_matrix.shape[0] != np_matrix.shape[1]:\n        raise ValueError(\"Eigenvalues are only defined for square matrices.\")\n    eigenvalues, _ = np.linalg.eig(np_matrix)\n    return eigenvalues.tolist()",
+    "text": "Eigen Value using numpy library for an N x N Matrix\n\nsource\n\ncalculate_eigenvalues\n\n calculate_eigenvalues (matrix:list)\n\n\n\n\n\nType\nDetails\n\n\n\n\nmatrix\nlist\nmatrix of size n x n\n\n\nReturns\nlist\nresult of size 1 x n\n\n\n\n\n\nExported source\ndef calculate_eigenvalues(matrix: list[list[Union[float,int]]] # matrix of size n x n\n                          ) -&gt; list[float]: # result of size 1 x n\n    np_matrix = np.array(matrix)\n    if np_matrix.shape[0] != np_matrix.shape[1]:\n        raise ValueError(\"Eigenvalues are only defined for square matrices.\")\n    eigenvalues, _ = np.linalg.eig(np_matrix)\n    return eigenvalues.tolist()",
     "crumbs": [
       "Eigen Value of Matrix"
+    ]
+  },
+  {
+    "objectID": "matrix_transformation.html",
+    "href": "matrix_transformation.html",
+    "title": "Matrix Transformation",
+    "section": "",
+    "text": "determinant_matrix\n\n determinant_matrix (matrix:numpy.ndarray)\n\nCalculate the determinant of a 2x2 matrix.\n\n\n\n\nType\nDetails\n\n\n\n\nmatrix\nndarray\nmatrix of size (2x2)\n\n\nReturns\nfloat\ndeterminant of the matrix\n\n\n\n\n\nExported source\ndef determinant_matrix(matrix: np.ndarray # matrix of size (2x2)\n                     ) -&gt; float: # determinant of the matrix\n    \"\"\"\n    Calculate the determinant of a 2x2 matrix.\n    \"\"\"\n    if matrix.shape != (2, 2):\n        raise ValueError(\"Matrix must be 2x2.\")\n    \n    a, b, c, d = matrix.flatten()\n    return a * d - b * c\n\n\n\n\n\ncheck_invertibility\n\n check_invertibility (matrix:numpy.ndarray)\n\nCheck if a matrix is invertible.\n\n\n\n\nType\nDetails\n\n\n\n\nmatrix\nndarray\nmatrix of size (2x2)\n\n\nReturns\nbool\nTrue or False\n\n\n\n\n\nExported source\ndef check_invertibility(matrix: np.ndarray # matrix of size (2x2)\n                        ) -&gt; bool: # True or False\n    \"\"\"\n    Check if a matrix is invertible.\n    \"\"\"\n    determinant = determinant_matrix(matrix)\n    return determinant != 0\n\n\n\n\n\ntransform_matrix\n\n transform_matrix (A:list, T:list, S:list)\n\nTransform a matrix A using a transformation matrix T and a scaling matrix S.\n\n\n\n\nType\nDetails\n\n\n\n\nA\nlist\nMatrix of shape (n, n)\n\n\nT\nlist\nMatrix of shape (n , m)\n\n\nS\nlist\nMatrix of shape (n , k)\n\n\nReturns\nlist\nMatrix of shape (m, k)\n\n\n\n\n\nExported source\ndef transform_matrix(A: list[list[Union[int, float]]], # Matrix of shape (n, n)\n                    T: list[list[Union[int, float]]], # Matrix of shape (n , m)\n                    S: list[list[Union[int, float]]]  # Matrix of shape (n , k)\n                    ) -&gt; list[list[Union[int, float]]]: # Matrix of shape (m, k)\n    \"\"\"\n    Transform a matrix A using a transformation matrix T and a scaling matrix S.\n    \"\"\"\n    if not check_invertibility(np.array(T)) and not check_invertibility(np.array(S)):\n        return [-1]\n    T = np.array(T)\n    a, b, c, d = T.flatten()\n    determinant = determinant_matrix(T)\n    inverse_T = [[d/ determinant, -b/ determinant], [-c/ determinant, a/ determinant]]\n    return inverse_T @ np.array(A) @ S",
+    "crumbs": [
+      "Matrix Transformation"
     ]
   }
 ]

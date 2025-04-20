@@ -142,8 +142,67 @@ class TestEigenValueMatrix2by2(unittest.TestCase):
         self.assertListAlmostEqual(calculate_eigenvalues_2by2([[1, 2], [2, 1]]), [3, -1])
 ```
 
+### Unit TestSuite Matrix Transformation
+
+``` python
+class TestMatrixTransformation(unittest.TestCase):
+    def test_matrix_transformation_test_case_1(self):
+        A = [[1, 2],
+             [3, 4]]
+        T = [[2, 0],
+             [0, 2]]
+        S = [[1, 1],
+             [0, 1]]
+        result = transform_matrix(A, T, S)
+        expected = [[0.5, 1.5],
+                    [1.5, 3.5]]
+        self.assertTrue(
+            np.allclose(result, expected),
+            f"Expected {expected}, but got {result}"
+        )
+
+    def test_matrix_transformation_test_case_2(self):
+        A = [[1, 0],
+             [0, 1]]
+        T = [[1, 2],
+             [3, 4]]
+        S = [[2, 0],
+             [0, 2]]
+        result = transform_matrix(A, T, S)
+        expected = [[-4.0, 2.0],
+                    [ 3.0, -1.0]]
+        self.assertTrue(
+            np.allclose(result, expected),
+            f"Expected {expected}, but got {result}"
+        )
+
+    def test_matrix_transformation_test_case_3(self):
+        A = [[2, 3],
+             [1, 4]]
+        T = [[3, 0],
+             [0, 3]]
+        S = [[1, 1],
+             [0, 1]]
+        result = transform_matrix(A, T, S)
+        expected = [[0.66666667, 1.66666667],
+                    [0.33333333, 1.66666667]]
+        self.assertTrue(
+            np.allclose(result, expected, atol=1e-6),
+            f"Expected approx {expected}, but got {result}"
+        )
+```
+
+### Testing functionality
+
+To test the functionality you can use the below code to run the above
+tests
+
 ``` python
 unittest.main(argv=[''], verbosity=2, exit=False)
+```
+
+``` python
+# unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
     test_eigen_value_basic (__main__.TestEigenValueMatrix2by2) ... ok
@@ -163,6 +222,9 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_reshape_basic (__main__.TestMatrixReshape) ... ok
     test_transpose_different_size (__main__.TestMatrixReshape) ... ok
     test_transpose_same_size (__main__.TestMatrixReshape) ... ok
+    test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation) ... ok
+    test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation) ... ok
+    test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation) ... ok
     test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
     test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
     test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
@@ -170,7 +232,7 @@ unittest.main(argv=[''], verbosity=2, exit=False)
     test_mean_basic (__main__.TestMeanMatrix) ... ok
 
     ----------------------------------------------------------------------
-    Ran 22 tests in 0.031s
+    Ran 25 tests in 0.009s
 
     OK
 

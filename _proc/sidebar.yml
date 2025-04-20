@@ -8,3 +8,4 @@ website:
       - 03_mean_by_row_column.ipynb
       - 04_matrix_scalar_multiply.ipynb
       - 05_eigen_value_matrix.ipynb
+      - 06_matrix_transformation.ipynb
