@@ -9,3 +9,4 @@ website:
       - 04_matrix_scalar_multiply.ipynb
       - 05_eigen_value_matrix.ipynb
       - 06_matrix_transformation.ipynb
+      - 07_matrix_multiplication.ipynb

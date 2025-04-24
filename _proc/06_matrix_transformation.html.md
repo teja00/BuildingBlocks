@@ -12,6 +12,8 @@ title: Matrix Transformation
 
 ---
 
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L13){target="_blank" style="float:right; font-size:smaller"}
+
 ### determinant_matrix
 
 >      determinant_matrix (matrix:numpy.ndarray)
@@ -42,6 +44,8 @@ def determinant_matrix(matrix: np.ndarray # matrix of size (2x2)
 
 ---
 
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L25){target="_blank" style="float:right; font-size:smaller"}
+
 ### check_invertibility
 
 >      check_invertibility (matrix:numpy.ndarray)
@@ -68,6 +72,8 @@ def check_invertibility(matrix: np.ndarray # matrix of size (2x2)
 
 
 ---
+
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L34){target="_blank" style="float:right; font-size:smaller"}
 
 ### transform_matrix
 

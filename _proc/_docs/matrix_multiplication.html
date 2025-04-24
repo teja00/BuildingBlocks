@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Transformation based on the equation:  T^{-1} A S Given A, T and S matrices">
 
-<title>Matrix Transformation – BuildingBlocks</title>
+<title>Matrix Multiplication – BuildingBlocks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,42 +101,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Matrix Transformation – BuildingBlocks">
-<meta property="og:description" content="Transformation based on the equation: \[ T^{-1} A S\] Given A, T and S matrices">
+<meta property="og:title" content="Matrix Multiplication – BuildingBlocks">
+<meta property="og:description" content="Creating Simple Implementation using Pytorch to work on Linear Algebra, Statistics using Nbdev">
 <meta property="og:site_name" content="BuildingBlocks">
-<meta name="twitter:title" content="Matrix Transformation – BuildingBlocks">
-<meta name="twitter:description" content="Transformation based on the equation: \[ T^{-1} A S\] Given A, T and S matrices">
+<meta name="twitter:title" content="Matrix Multiplication – BuildingBlocks">
+<meta name="twitter:description" content="Creating Simple Implementation using Pytorch to work on Linear Algebra, Statistics using Nbdev">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -162,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./matrix_transformation.html">Matrix Transformation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./matrix_multiplication.html">Matrix Multiplication</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -218,13 +188,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matrix_transformation.html" class="sidebar-item-text sidebar-link active">
+  <a href="./matrix_transformation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Matrix Transformation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matrix_multiplication.html" class="sidebar-item-text sidebar-link">
+  <a href="./matrix_multiplication.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Matrix Multiplication</span></a>
   </div>
 </li>
@@ -238,25 +208,25 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#determinant_matrix" id="toc-determinant_matrix" class="nav-link active" data-scroll-target="#determinant_matrix">determinant_matrix</a></li>
-  <li><a href="#check_invertibility" id="toc-check_invertibility" class="nav-link" data-scroll-target="#check_invertibility">check_invertibility</a></li>
-  <li><a href="#transform_matrix" id="toc-transform_matrix" class="nav-link" data-scroll-target="#transform_matrix">transform_matrix</a></li>
+  <li><a href="#brute-force-methodology" id="toc-brute-force-methodology" class="nav-link active" data-scroll-target="#brute-force-methodology">Brute Force Methodology</a>
+  <ul class="collapse">
+  <li><a href="#matrix_multiply" id="toc-matrix_multiply" class="nav-link" data-scroll-target="#matrix_multiply">matrix_multiply</a></li>
+  </ul></li>
+  <li><a href="#pytorch-optimization" id="toc-pytorch-optimization" class="nav-link" data-scroll-target="#pytorch-optimization">PyTorch Optimization</a>
+  <ul class="collapse">
+  <li><a href="#matrix_multiply_torch" id="toc-matrix_multiply_torch" class="nav-link" data-scroll-target="#matrix_multiply_torch">matrix_multiply_torch</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_transformation.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_multiplication.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Matrix Transformation</h1>
+<h1 class="title">Matrix Multiplication</h1>
 </div>
 
-<div>
-  <div class="description">
-    Transformation based on the equation: <span class="math display">\[ T^{-1} A S\]</span> Given A, T and S matrices
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -272,15 +242,22 @@ window.Quarto = {
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="brute-force-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="brute-force-methodology">Brute Force Methodology</h2>
+<p>This approach uses the most basic and straightforward method of matrix multiplication, directly applying the definition outlined above.</p>
 <hr>
-<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L13" target="_blank" style="float:right; font-size:smaller">source</a></p>
-<section id="determinant_matrix" class="level3">
-<h3 class="anchored" data-anchor-id="determinant_matrix">determinant_matrix</h3>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L12" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="matrix_multiply" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_multiply">matrix_multiply</h3>
 <blockquote class="blockquote">
-<pre><code> determinant_matrix (matrix:numpy.ndarray)</code></pre>
+<pre><code> matrix_multiply (a:List[List[float]], b:List[List[float]])</code></pre>
 </blockquote>
-<p><em>Calculate the determinant of a 2x2 matrix.</em></p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -290,42 +267,60 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td>matrix</td>
-<td>ndarray</td>
-<td>matrix of size (2x2)</td>
+<td>a</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (m, n)</td>
 </tr>
 <tr class="even">
+<td>b</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (n, p)</td>
+</tr>
+<tr class="odd">
 <td><strong>Returns</strong></td>
-<td><strong>float</strong></td>
-<td><strong>determinant of the matrix</strong></td>
+<td><strong>typing.List[typing.List[float]]</strong></td>
+<td><strong>output matrix of size (m, p)</strong></td>
 </tr>
 </tbody>
 </table>
-<div id="df1a7cac" class="cell">
+<div id="df123dc8" class="cell">
 <details open="" class="code-fold">
 <summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> determinant_matrix(matrix: np.ndarray <span class="co"># matrix of size (2x2)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                     ) <span class="op">-&gt;</span> <span class="bu">float</span>: <span class="co"># determinant of the matrix</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the determinant of a 2x2 matrix.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> matrix.shape <span class="op">!=</span> (<span class="dv">2</span>, <span class="dv">2</span>):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Matrix must be 2x2."</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    a, b, c, d <span class="op">=</span> matrix.flatten()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> d <span class="op">-</span> b <span class="op">*</span> c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_multiply(a: List[List[<span class="bu">float</span>]], <span class="co"># input matrix of size (m, n)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    b: List[List[<span class="bu">float</span>]] <span class="co"># input matrix of size (n, p)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">-&gt;</span> List[List[<span class="bu">float</span>]]: <span class="co"># output matrix of size (m, p)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> np.array(a)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.array(b)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ar, ac <span class="op">=</span> a.shape</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    br, bc <span class="op">=</span> b.shape</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ac <span class="op">!=</span> br:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Incompatible shapes for matrix multiplication"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> np.zeros((ar, bc))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ar):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(bc):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(ac): <span class="co"># or br works too</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                result[i][j] <span class="op">+=</span> a[i][k] <span class="op">*</span> b[k][j]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<hr>
-<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L25" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
-<section id="check_invertibility" class="level3">
-<h3 class="anchored" data-anchor-id="check_invertibility">check_invertibility</h3>
+</section>
+<section id="pytorch-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="pytorch-optimization">PyTorch Optimization</h2>
+<p>PyTorch leverages <strong>ATen</strong>, a high-performance tensor library written in C++. At its core, PyTorch optimizes matrix multiplication by utilizing efficient element-wise operations and parallel computation under the hood. These low-level implementations significantly accelerate the computation.</p>
+<p>Let’s now rewrite the above matrix multiplication using PyTorch’s element-wise operations to take advantage of this optimization.</p>
+<hr>
+<section id="matrix_multiply_torch" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_multiply_torch">matrix_multiply_torch</h3>
 <blockquote class="blockquote">
-<pre><code> check_invertibility (matrix:numpy.ndarray)</code></pre>
+<pre><code> matrix_multiply_torch (a:List[List[float]], b:List[List[float]])</code></pre>
 </blockquote>
-<p><em>Check if a matrix is invertible.</em></p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -335,90 +330,44 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td>matrix</td>
-<td>ndarray</td>
-<td>matrix of size (2x2)</td>
+<td>a</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (m, n)</td>
 </tr>
 <tr class="even">
+<td>b</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (n, p)</td>
+</tr>
+<tr class="odd">
 <td><strong>Returns</strong></td>
-<td><strong>bool</strong></td>
-<td><strong>True or False</strong></td>
+<td><strong>typing.List[typing.List[float]]</strong></td>
+<td><strong>output matrix of size (m, p)</strong></td>
 </tr>
 </tbody>
 </table>
-<div id="88c1aaf5" class="cell">
+<div id="02e06b22" class="cell">
 <details open="" class="code-fold">
 <summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_invertibility(matrix: np.ndarray <span class="co"># matrix of size (2x2)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                        ) <span class="op">-&gt;</span> <span class="bu">bool</span>: <span class="co"># True or False</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Check if a matrix is invertible.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    determinant <span class="op">=</span> determinant_matrix(matrix)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> determinant <span class="op">!=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<hr>
-<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L34" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
-<section id="transform_matrix" class="level3">
-<h3 class="anchored" data-anchor-id="transform_matrix">transform_matrix</h3>
-<blockquote class="blockquote">
-<pre><code> transform_matrix (A:list, T:list, S:list)</code></pre>
-</blockquote>
-<p><em>Transform a matrix A using a transformation matrix T and a scaling matrix S.</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>list</td>
-<td>Matrix of shape (n, n)</td>
-</tr>
-<tr class="even">
-<td>T</td>
-<td>list</td>
-<td>Matrix of shape (n , m)</td>
-</tr>
-<tr class="odd">
-<td>S</td>
-<td>list</td>
-<td>Matrix of shape (n , k)</td>
-</tr>
-<tr class="even">
-<td><strong>Returns</strong></td>
-<td><strong>list</strong></td>
-<td><strong>Matrix of shape (m, k)</strong></td>
-</tr>
-</tbody>
-</table>
-<div id="3339e472" class="cell">
-<details open="" class="code-fold">
-<summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transform_matrix(A: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]], <span class="co"># Matrix of shape (n, n)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                    T: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]], <span class="co"># Matrix of shape (n , m)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                    S: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]]  <span class="co"># Matrix of shape (n , k)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]]: <span class="co"># Matrix of shape (m, k)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Transform a matrix A using a transformation matrix T and a scaling matrix S.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> check_invertibility(np.array(T)) <span class="kw">and</span> <span class="kw">not</span> check_invertibility(np.array(S)):</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> np.array(T)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    a, b, c, d <span class="op">=</span> T.flatten()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    determinant <span class="op">=</span> determinant_matrix(T)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    inverse_T <span class="op">=</span> [[d<span class="op">/</span> determinant, <span class="op">-</span>b<span class="op">/</span> determinant], [<span class="op">-</span>c<span class="op">/</span> determinant, a<span class="op">/</span> determinant]]</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inverse_T <span class="op">@</span> np.array(A) <span class="op">@</span> S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_multiply_torch(a: List[List[<span class="bu">float</span>]], <span class="co"># input matrix of size (m, n)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                          b: List[List[<span class="bu">float</span>]] <span class="co"># input matrix of size (n, p)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        ) <span class="op">-&gt;</span> List[List[<span class="bu">float</span>]]: <span class="co"># output matrix of size (m, p)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> torch.tensor(a)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> torch.tensor(b)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        ar, ac <span class="op">=</span> a.shape</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        br, bc <span class="op">=</span> b.shape</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ac <span class="op">!=</span> br:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Incompatible shapes for matrix multiplication"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> torch.zeros((ar, bc))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ar):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(bc):</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                result[i][j] <span class="op">=</span> torch.<span class="bu">sum</span>(a[i, :] <span class="op">*</span> b[:, j])</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

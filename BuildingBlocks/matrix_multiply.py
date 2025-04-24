@@ -8,7 +8,7 @@ from typing import List, Tuple
 import numpy as np
 import torch
 
-# %% ../nbs/07_matrix_multiplication.ipynb 3
+# %% ../nbs/07_matrix_multiplication.ipynb 4
 def matrix_multiply(a: List[List[float]], # input matrix of size (m, n)
                     b: List[List[float]] # input matrix of size (n, p)
                     ) -> List[List[float]]: # output matrix of size (m, p)
