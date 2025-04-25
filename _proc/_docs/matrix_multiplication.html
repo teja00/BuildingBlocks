@@ -216,6 +216,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#matrix_multiply_torch" id="toc-matrix_multiply_torch" class="nav-link" data-scroll-target="#matrix_multiply_torch">matrix_multiply_torch</a></li>
   </ul></li>
+  <li><a href="#numpy-broadcasting" id="toc-numpy-broadcasting" class="nav-link" data-scroll-target="#numpy-broadcasting">Numpy Broadcasting</a>
+  <ul class="collapse">
+  <li><a href="#step-by-step-breakdown" id="toc-step-by-step-breakdown" class="nav-link" data-scroll-target="#step-by-step-breakdown">Step by Step Breakdown</a></li>
+  <li><a href="#visual-intuition" id="toc-visual-intuition" class="nav-link" data-scroll-target="#visual-intuition">Visual Intuition</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#matrix_multiply_torch_optimized" id="toc-matrix_multiply_torch_optimized" class="nav-link" data-scroll-target="#matrix_multiply_torch_optimized">matrix_multiply_torch_optimized</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_multiplication.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
@@ -310,6 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>PyTorch leverages <strong>ATen</strong>, a high-performance tensor library written in C++. At its core, PyTorch optimizes matrix multiplication by utilizing efficient element-wise operations and parallel computation under the hood. These low-level implementations significantly accelerate the computation.</p>
 <p>Let’s now rewrite the above matrix multiplication using PyTorch’s element-wise operations to take advantage of this optimization.</p>
 <hr>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L29" target="_blank" style="float:right; font-size:smaller">source</a></p>
 <section id="matrix_multiply_torch" class="level3">
 <h3 class="anchored" data-anchor-id="matrix_multiply_torch">matrix_multiply_torch</h3>
 <blockquote class="blockquote">
@@ -363,6 +371,135 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(bc):</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                result[i][j] <span class="op">=</span> torch.<span class="bu">sum</span>(a[i, :] <span class="op">*</span> b[:, j])</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="numpy-broadcasting" class="level2">
+<h2 class="anchored" data-anchor-id="numpy-broadcasting">Numpy Broadcasting</h2>
+<p>Broadcasting is a method used by Pytorch (and libraries like NumPy) to automatically expand the shape of smaller arrays so that arithmetic operations (like addition, multiplication) can happen without explicit looping in Python.</p>
+<section id="step-by-step-breakdown" class="level3">
+<h3 class="anchored" data-anchor-id="step-by-step-breakdown">Step by Step Breakdown</h3>
+<p>Let’s walk through the broadcasting logic:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>c[i] <span class="op">=</span> (a[i,:].unsqueeze(<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span> b).<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s assume: - <code>a</code> is of shape <code>(ar, ac)</code> =&gt; e.g., <code>(2, 3)</code> - <code>b</code> is of shape <code>(br, bc)</code> =&gt; e.g., <code>(3, 4)</code> - So <code>ac == br</code> =&gt; matrix multiplication is valid - <code>c</code> will have shape <code>(ar, bc)</code> =&gt; e.g., <code>(2, 4)</code></p>
+<section id="ai" class="level4">
+<h4 class="anchored" data-anchor-id="ai">1. <code>a[i, :]</code></h4>
+<p>This picks the <code>i</code>th row of <code>a</code>, which is a 1D tensor of shape <code>(ac,)</code> =&gt; e.g., shape <code>(3,)</code></p>
+</section>
+<section id="unsqueeze-1" class="level4">
+<h4 class="anchored" data-anchor-id="unsqueeze-1">2. <code>.unsqueeze(-1)</code></h4>
+<p>Adds a new axis at the end (i.e., converts a row vector to a column vector). So now:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>a[i,:].unsqueeze(<span class="op">-</span><span class="dv">1</span>) <span class="op">=&gt;</span>  shape becomes (ac, <span class="dv">1</span>) <span class="op">=&gt;</span> e.g., (<span class="dv">3</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ai.unsqueeze-1-b" class="level4">
+<h4 class="anchored" data-anchor-id="ai.unsqueeze-1-b">3. <code>a[i,:].unsqueeze(-1) * b</code></h4>
+<p>Here’s where <strong>broadcasting</strong> happens.</p>
+<ul>
+<li><code>a[i,:].unsqueeze(-1)</code> is shape <code>(3, 1)</code></li>
+<li><code>b</code> is shape <code>(3, 4)</code></li>
+</ul>
+<p><strong>Broadcasting rule</strong>: When dimensions don’t match, PyTorch inserts a <code>1</code> in the smaller dimension and stretches it as needed.</p>
+<p>So effectively:</p>
+<pre><code>(3, 1) * (3, 4)
+becomes
+(3, 4) * (3, 4)</code></pre>
+<p>Each element of the column vector (from <code>a[i, :]</code>) is multiplied with the corresponding row in <code>b</code>.</p>
+</section>
+<section id="sumdim0" class="level4">
+<h4 class="anchored" data-anchor-id="sumdim0">4. <code>.sum(dim=0)</code></h4>
+<p>This sums along <strong>rows</strong>, resulting in a vector of shape <code>(4,)</code>.</p>
+<p>So:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>c[i] <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">1</span>) <span class="op">*</span> (<span class="dv">3</span>, <span class="dv">4</span>) → (<span class="dv">3</span>, <span class="dv">4</span>) → <span class="bu">sum</span> over dim<span class="op">=</span><span class="dv">0</span> → (<span class="dv">4</span>,)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This becomes the <code>i</code>th row of the result <code>c</code>.</p>
+<hr>
+</section>
+</section>
+<section id="visual-intuition" class="level3">
+<h3 class="anchored" data-anchor-id="visual-intuition">Visual Intuition</h3>
+<p>Say:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a[i,:] <span class="op">=</span> [a1, a2, a3]  → shape (<span class="dv">3</span>,)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [[b11, b12, b13, b14],</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>     [b21, b22, b23, b24],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     [b31, b32, b33, b34]]  → shape (<span class="dv">3</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then <code>a[i,:].unsqueeze(-1) = [[a1], [a2], [a3]]</code> → shape (3, 1)</p>
+<p>Now:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a[i,:].unsqueeze(<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span> b <span class="op">=</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>[[a1<span class="op">*</span>b11, a1<span class="op">*</span>b12, a1<span class="op">*</span>b13, a1<span class="op">*</span>b14],</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> [a2<span class="op">*</span>b21, a2<span class="op">*</span>b22, a2<span class="op">*</span>b23, a2<span class="op">*</span>b24],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> [a3<span class="op">*</span>b31, a3<span class="op">*</span>b32, a3<span class="op">*</span>b33, a3<span class="op">*</span>b34]]  → shape (<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>.<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">0</span>) <span class="op">=</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>[ a1<span class="op">*</span>b11 <span class="op">+</span> a2<span class="op">*</span>b21 <span class="op">+</span> a3<span class="op">*</span>b31,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  a1<span class="op">*</span>b12 <span class="op">+</span> a2<span class="op">*</span>b22 <span class="op">+</span> a3<span class="op">*</span>b32,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  a1<span class="op">*</span>b13 <span class="op">+</span> a2<span class="op">*</span>b23 <span class="op">+</span> a3<span class="op">*</span>b33,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  a1<span class="op">*</span>b14 <span class="op">+</span> a2<span class="op">*</span>b24 <span class="op">+</span> a3<span class="op">*</span>b34 ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which is exactly the dot product of the <code>i</code>th row of <code>a</code> with each column of <code>b</code>.</p>
+<hr>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>This line:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>c[i] <span class="op">=</span> (a[i,:].unsqueeze(<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span> b).<span class="bu">sum</span>(dim<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is a clever use of broadcasting to compute one row of matrix multiplication at a time by: - Turning the row of <code>a</code> into a column (<code>(ac,)</code> → <code>(ac, 1)</code>) - Multiplying it with <code>b</code> of shape <code>(ac, bc)</code> to get a broadcasted result - Summing along rows to compute the dot products</p>
+<p>Let me know if you want the same logic visualized with real numbers or debug prints.</p>
+<hr>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L45" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="matrix_multiply_torch_optimized" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_multiply_torch_optimized">matrix_multiply_torch_optimized</h3>
+<blockquote class="blockquote">
+<pre><code> matrix_multiply_torch_optimized (a:List[List[float]],
+                                  b:List[List[float]])</code></pre>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>a</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (m, n)</td>
+</tr>
+<tr class="even">
+<td>b</td>
+<td>typing.List[typing.List[float]]</td>
+<td>input matrix of size (n, p)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>typing.List[typing.List[float]]</strong></td>
+<td><strong>output matrix of size (m, p)</strong></td>
+</tr>
+</tbody>
+</table>
+<div id="135ad523" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_multiply_torch_optimized(a: List[List[<span class="bu">float</span>]], <span class="co"># input matrix of size (m, n)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                    b: List[List[<span class="bu">float</span>]] <span class="co"># input matrix of size (n, p)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                    ) <span class="op">-&gt;</span> List[List[<span class="bu">float</span>]]: <span class="co"># output matrix of size (m, p)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> torch.tensor(a)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> torch.tensor(b)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        ar, ac <span class="op">=</span> a.shape</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        br, bc <span class="op">=</span> b.shape</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ac <span class="op">!=</span> br:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Incompatible shapes for matrix multiplication"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> torch.zeros((ar, bc))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ar):</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>              result[i] <span class="op">=</span> (a[i, :].unsqueeze(<span class="dv">1</span>) <span class="op">*</span> b).<span class="bu">sum</span>(dim <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>              <span class="bu">print</span>(result[i], a[i, :].unsqueeze(<span class="dv">1</span>), b)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

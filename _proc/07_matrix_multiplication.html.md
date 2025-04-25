@@ -56,6 +56,8 @@ Let’s now rewrite the above matrix multiplication using PyTorch's element-wise
 
 ---
 
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L29){target="_blank" style="float:right; font-size:smaller"}
+
 ### matrix_multiply_torch
 
 >      matrix_multiply_torch (a:List[List[float]], b:List[List[float]])
@@ -82,6 +84,142 @@ def matrix_multiply_torch(a: List[List[float]], # input matrix of size (m, n)
         for i in range(ar):
             for j in range(bc):
                 result[i][j] = torch.sum(a[i, :] * b[:, j])
+        return result
+```
+:::
+
+
+## Numpy Broadcasting
+
+Broadcasting is a method used by Pytorch (and libraries like NumPy) to automatically expand the shape of smaller arrays so that arithmetic operations (like addition, multiplication) can happen without explicit looping in Python.
+
+### Step by Step Breakdown
+
+Let's walk through the broadcasting logic:
+
+```python
+c[i] = (a[i,:].unsqueeze(-1) * b).sum(dim=0)
+```
+
+Let’s assume:
+- `a` is of shape `(ar, ac)` => e.g., `(2, 3)`
+- `b` is of shape `(br, bc)` => e.g., `(3, 4)`
+- So `ac == br` => matrix multiplication is valid
+- `c` will have shape `(ar, bc)` => e.g., `(2, 4)`
+
+#### 1. `a[i, :]`
+This picks the `i`th row of `a`, which is a 1D tensor of shape `(ac,)` => e.g., shape `(3,)`
+
+#### 2. `.unsqueeze(-1)`
+Adds a new axis at the end (i.e., converts a row vector to a column vector). So now:
+```python
+a[i,:].unsqueeze(-1) =>  shape becomes (ac, 1) => e.g., (3, 1)
+```
+
+#### 3. `a[i,:].unsqueeze(-1) * b`
+Here’s where **broadcasting** happens.
+
+- `a[i,:].unsqueeze(-1)` is shape `(3, 1)`
+- `b` is shape `(3, 4)`
+
+**Broadcasting rule**: When dimensions don’t match, PyTorch inserts a `1` in the smaller dimension and stretches it as needed.
+
+So effectively:
+```
+(3, 1) * (3, 4)
+becomes
+(3, 4) * (3, 4)
+```
+
+Each element of the column vector (from `a[i, :]`) is multiplied with the corresponding row in `b`.
+
+#### 4. `.sum(dim=0)`
+This sums along **rows**, resulting in a vector of shape `(4,)`.
+
+So:
+```python
+c[i] = (3, 1) * (3, 4) → (3, 4) → sum over dim=0 → (4,)
+```
+
+This becomes the `i`th row of the result `c`.
+
+---
+
+### Visual Intuition
+
+Say:
+```python
+a[i,:] = [a1, a2, a3]  → shape (3,)
+b = [[b11, b12, b13, b14],
+     [b21, b22, b23, b24],
+     [b31, b32, b33, b34]]  → shape (3, 4)
+```
+
+Then `a[i,:].unsqueeze(-1) = [[a1], [a2], [a3]]` → shape (3, 1)
+
+Now:
+```python
+a[i,:].unsqueeze(-1) * b =
+[[a1*b11, a1*b12, a1*b13, a1*b14],
+ [a2*b21, a2*b22, a2*b23, a2*b24],
+ [a3*b31, a3*b32, a3*b33, a3*b34]]  → shape (3, 4)
+
+.sum(dim=0) =
+[ a1*b11 + a2*b21 + a3*b31,
+  a1*b12 + a2*b22 + a3*b32,
+  a1*b13 + a2*b23 + a3*b33,
+  a1*b14 + a2*b24 + a3*b34 ]
+```
+
+Which is exactly the dot product of the `i`th row of `a` with each column of `b`.
+
+---
+
+### Summary
+
+This line:
+```python
+c[i] = (a[i,:].unsqueeze(-1) * b).sum(dim=0)
+```
+
+is a clever use of broadcasting to compute one row of matrix multiplication at a time by:
+- Turning the row of `a` into a column (`(ac,)` → `(ac, 1)`)
+- Multiplying it with `b` of shape `(ac, bc)` to get a broadcasted result
+- Summing along rows to compute the dot products
+
+Let me know if you want the same logic visualized with real numbers or debug prints.
+
+---
+
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L45){target="_blank" style="float:right; font-size:smaller"}
+
+### matrix_multiply_torch_optimized
+
+>      matrix_multiply_torch_optimized (a:List[List[float]],
+>                                       b:List[List[float]])
+
+|    | **Type** | **Details** |
+| -- | -------- | ----------- |
+| a | typing.List[typing.List[float]] | input matrix of size (m, n) |
+| b | typing.List[typing.List[float]] | input matrix of size (n, p) |
+| **Returns** | **typing.List[typing.List[float]]** | **output matrix of size (m, p)** |
+
+
+::: {#135ad523 .cell}
+``` {.python .cell-code code-fold="show" code-summary="Exported source"}
+def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size (m, n)
+                                    b: List[List[float]] # input matrix of size (n, p)
+                                    ) -> List[List[float]]: # output matrix of size (m, p)
+        a = torch.tensor(a)
+        b = torch.tensor(b)
+        ar, ac = a.shape
+        br, bc = b.shape
+        if ac != br:
+            raise ValueError("Incompatible shapes for matrix multiplication")
+        result = torch.zeros((ar, bc))
+        for i in range(ar):
+              result[i] = (a[i, :].unsqueeze(1) * b).sum(dim = 0)
+              print(result[i], a[i, :].unsqueeze(1), b)
         return result
 ```
 :::
