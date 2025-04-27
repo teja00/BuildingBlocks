@@ -225,3 +225,17 @@ def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size
 :::
 
 
+## Using EINSUM
+
+::: {#62af5e81 .cell}
+``` {.python .cell-code}
+def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size (m, n)
+                                    b: List[List[float]] # input matrix of size (n, p)
+                                    ) -> List[List[float]]: # output matrix of size (m, p)
+        a = torch.tensor(a)
+        b = torch.tensor(b)
+        return np.einsum('ij, jk -> ik', a, b).tolist()
+```
+:::
+
+

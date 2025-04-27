@@ -188,5 +188,15 @@
     "crumbs": [
       "Matrix Multiplication"
     ]
+  },
+  {
+    "objectID": "matrix_multiplication.html#using-einsum",
+    "href": "matrix_multiplication.html#using-einsum",
+    "title": "Matrix Multiplication",
+    "section": "Using EINSUM",
+    "text": "Using EINSUM\n\ndef matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size (m, n)\n                                    b: List[List[float]] # input matrix of size (n, p)\n                                    ) -&gt; List[List[float]]: # output matrix of size (m, p)\n        a = torch.tensor(a)\n        b = torch.tensor(b)\n        return np.einsum('ij, jk -&gt; ik', a, b).tolist()\n\n\na = np.arange(25).reshape(5,5)\nprint(a)\nresult = np.einsum('ii -&gt; i', a)\nprint(result)\nresult = np.einsum('ij -&gt; i', a)\nprint(result)\n\n[[ 0  1  2  3  4]\n [ 5  6  7  8  9]\n [10 11 12 13 14]\n [15 16 17 18 19]\n [20 21 22 23 24]]\n[ 0  6 12 18 24]\n[ 10  35  60  85 110]",
+    "crumbs": [
+      "Matrix Multiplication"
+    ]
   }
 ]
