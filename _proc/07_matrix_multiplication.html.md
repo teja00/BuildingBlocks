@@ -191,7 +191,7 @@ Let me know if you want the same logic visualized with real numbers or debug pri
 
 ---
 
-[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L45){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L61){target="_blank" style="float:right; font-size:smaller"}
 
 ### matrix_multiply_torch_optimized
 
@@ -227,9 +227,22 @@ def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size
 
 ## Using EINSUM
 
+---
+
+### matrix_multiply_torch_einsum
+
+>      matrix_multiply_torch_einsum (a:List[List[float]], b:List[List[float]])
+
+|    | **Type** | **Details** |
+| -- | -------- | ----------- |
+| a | typing.List[typing.List[float]] | input matrix of size (m, n) |
+| b | typing.List[typing.List[float]] | input matrix of size (n, p) |
+| **Returns** | **typing.List[typing.List[float]]** | **output matrix of size (m, p)** |
+
+
 ::: {#62af5e81 .cell}
-``` {.python .cell-code}
-def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size (m, n)
+``` {.python .cell-code code-fold="show" code-summary="Exported source"}
+def matrix_multiply_torch_einsum(a: List[List[float]], # input matrix of size (m, n)
                                     b: List[List[float]] # input matrix of size (n, p)
                                     ) -> List[List[float]]: # output matrix of size (m, p)
         a = torch.tensor(a)
