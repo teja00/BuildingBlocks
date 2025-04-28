@@ -56,3 +56,11 @@ def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size
               result[i] = (a[i, :].unsqueeze(1) * b).sum(dim = 0)
               print(result[i], a[i, :].unsqueeze(1), b)
         return result
+
+# %% ../nbs/07_matrix_multiplication.ipynb 11
+def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size (m, n)
+                                    b: List[List[float]] # input matrix of size (n, p)
+                                    ) -> List[List[float]]: # output matrix of size (m, p)
+        a = torch.tensor(a)
+        b = torch.tensor(b)
+        return np.einsum('ij, jk -> ik', a, b).tolist()
