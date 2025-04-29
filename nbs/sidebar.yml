@@ -10,3 +10,4 @@ website:
       - 05_eigen_value_matrix.ipynb
       - 06_matrix_transformation.ipynb
       - 07_matrix_multiplication.ipynb
+      - 08_matrix_inverse.ipynb

@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Matrix Multiplication</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix_inverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Matrix Inverse</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -225,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#using-einsum" id="toc-using-einsum" class="nav-link" data-scroll-target="#using-einsum">Using EINSUM</a>
   <ul class="collapse">
-  <li><a href="#matrix_multiply_torch_optimized-1" id="toc-matrix_multiply_torch_optimized-1" class="nav-link" data-scroll-target="#matrix_multiply_torch_optimized-1">matrix_multiply_torch_optimized</a></li>
+  <li><a href="#matrix_multiply_torch_einsum" id="toc-matrix_multiply_torch_einsum" class="nav-link" data-scroll-target="#matrix_multiply_torch_einsum">matrix_multiply_torch_einsum</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_multiplication.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
@@ -448,7 +454,7 @@ becomes
 <p>is a clever use of broadcasting to compute one row of matrix multiplication at a time by: - Turning the row of <code>a</code> into a column (<code>(ac,)</code> → <code>(ac, 1)</code>) - Multiplying it with <code>b</code> of shape <code>(ac, bc)</code> to get a broadcasted result - Summing along rows to compute the dot products</p>
 <p>Let me know if you want the same logic visualized with real numbers or debug prints.</p>
 <hr>
-<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L61" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L45" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
 <section id="matrix_multiply_torch_optimized" class="level3">
 <h3 class="anchored" data-anchor-id="matrix_multiply_torch_optimized">matrix_multiply_torch_optimized</h3>
@@ -512,11 +518,10 @@ becomes
 <h2 class="anchored" data-anchor-id="using-einsum">Using EINSUM</h2>
 <hr>
 <p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L61" target="_blank" style="float:right; font-size:smaller">source</a></p>
-<section id="matrix_multiply_torch_optimized-1" class="level3">
-<h3 class="anchored" data-anchor-id="matrix_multiply_torch_optimized-1">matrix_multiply_torch_optimized</h3>
+<section id="matrix_multiply_torch_einsum" class="level3">
+<h3 class="anchored" data-anchor-id="matrix_multiply_torch_einsum">matrix_multiply_torch_einsum</h3>
 <blockquote class="blockquote">
-<pre><code> matrix_multiply_torch_optimized (a:List[List[float]],
-                                  b:List[List[float]])</code></pre>
+<pre><code> matrix_multiply_torch_einsum (a:List[List[float]], b:List[List[float]])</code></pre>
 </blockquote>
 <table class="caption-top table">
 <colgroup>
@@ -552,7 +557,7 @@ becomes
 <div id="62af5e81" class="cell">
 <details open="" class="code-fold">
 <summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_multiply_torch_optimized(a: List[List[<span class="bu">float</span>]], <span class="co"># input matrix of size (m, n)</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_multiply_torch_einsum(a: List[List[<span class="bu">float</span>]], <span class="co"># input matrix of size (m, n)</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    b: List[List[<span class="bu">float</span>]] <span class="co"># input matrix of size (n, p)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                    ) <span class="op">-&gt;</span> List[List[<span class="bu">float</span>]]: <span class="co"># output matrix of size (m, p)</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> torch.tensor(a)</span>

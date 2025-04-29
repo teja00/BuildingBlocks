@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Transformation based on the equation:  T^{-1} A S Given A, T and S matrices">
+<meta name="description" content="Writing a Python function that calculates the inverse of a 2x2 matrix. Return ‘None’ if the matrix is not invertible.">
 
-<title>Matrix Transformation – BuildingBlocks</title>
+<title>Matrix Inverse – BuildingBlocks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,11 +133,11 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Matrix Transformation – BuildingBlocks">
-<meta property="og:description" content="Transformation based on the equation: \[ T^{-1} A S\] Given A, T and S matrices">
+<meta property="og:title" content="Matrix Inverse – BuildingBlocks">
+<meta property="og:description" content="Writing a Python function that calculates the inverse of a 2x2 matrix. Return ‘None’ if the matrix is not invertible.">
 <meta property="og:site_name" content="BuildingBlocks">
-<meta name="twitter:title" content="Matrix Transformation – BuildingBlocks">
-<meta name="twitter:description" content="Transformation based on the equation: \[ T^{-1} A S\] Given A, T and S matrices">
+<meta name="twitter:title" content="Matrix Inverse – BuildingBlocks">
+<meta name="twitter:description" content="Writing a Python function that calculates the inverse of a 2x2 matrix. Return ‘None’ if the matrix is not invertible.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -162,7 +162,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./matrix_transformation.html">Matrix Transformation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./matrix_inverse.html">Matrix Inverse</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -218,7 +218,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matrix_transformation.html" class="sidebar-item-text sidebar-link active">
+  <a href="./matrix_transformation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Matrix Transformation</span></a>
   </div>
 </li>
@@ -230,7 +230,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./matrix_inverse.html" class="sidebar-item-text sidebar-link">
+  <a href="./matrix_inverse.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Matrix Inverse</span></a>
   </div>
 </li>
@@ -244,23 +244,22 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#determinant_matrix" id="toc-determinant_matrix" class="nav-link active" data-scroll-target="#determinant_matrix">determinant_matrix</a></li>
-  <li><a href="#check_invertibility" id="toc-check_invertibility" class="nav-link" data-scroll-target="#check_invertibility">check_invertibility</a></li>
-  <li><a href="#transform_matrix" id="toc-transform_matrix" class="nav-link" data-scroll-target="#transform_matrix">transform_matrix</a></li>
+  <li><a href="#importance" id="toc-importance" class="nav-link active" data-scroll-target="#importance">Importance</a></li>
+  <li><a href="#inverse_2x2" id="toc-inverse_2x2" class="nav-link" data-scroll-target="#inverse_2x2">inverse_2x2</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_transformation.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/teja00/BuildingBlocks/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="matrix_inverse.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Matrix Transformation</h1>
+<h1 class="title">Matrix Inverse</h1>
 </div>
 
 <div>
   <div class="description">
-    Transformation based on the equation: <span class="math display">\[ T^{-1} A S\]</span> Given A, T and S matrices
+    Writing a Python function that calculates the inverse of a 2x2 matrix. Return ‘None’ if the matrix is not invertible.
   </div>
 </div>
 
@@ -278,13 +277,32 @@ window.Quarto = {
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>The inverse of a matrix ( A ) is another matrix, often denoted ( A^{-1} ), such that:</p>
+<p><span class="math display">\[
+AA^{-1} = A^{-1}A = I
+\]</span></p>
+<p>where ( I ) is the identity matrix. For a 2×2 matrix:</p>
+<p><span class="math display">\[
+A = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}
+\]</span></p>
+<p>The inverse is given by:</p>
+<p><span class="math display">\[
+A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d &amp; -b \\ -c &amp; a \end{pmatrix}
+\]</span></p>
+<p>provided that the determinant ( (A) = ad - bc ) is non-zero.</p>
+<p>If ( (A) = 0 ), the matrix does not have an inverse.</p>
 <hr>
-<section id="determinant_matrix" class="level3">
-<h3 class="anchored" data-anchor-id="determinant_matrix">determinant_matrix</h3>
+<section id="importance" class="level3">
+<h3 class="anchored" data-anchor-id="importance">Importance</h3>
+<p>Calculating the inverse of a matrix is essential in various applications, such as solving systems of linear equations, where the inverse is used to find solutions efficiently.</p>
+<hr>
+<p><a href="https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_transformation.py#L14" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="inverse_2x2" class="level3">
+<h3 class="anchored" data-anchor-id="inverse_2x2">inverse_2x2</h3>
 <blockquote class="blockquote">
-<pre><code> determinant_matrix (matrix:numpy.ndarray)</code></pre>
+<pre><code> inverse_2x2 (matrix:list)</code></pre>
 </blockquote>
-<p><em>Calculate the determinant of a 2x2 matrix.</em></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -296,128 +314,29 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td>matrix</td>
-<td>ndarray</td>
-<td>matrix of size (2x2)</td>
-</tr>
-<tr class="even">
-<td><strong>Returns</strong></td>
-<td><strong>float</strong></td>
-<td><strong>determinant of the matrix</strong></td>
-</tr>
-</tbody>
-</table>
-<div id="df1a7cac" class="cell">
-<details open="" class="code-fold">
-<summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> determinant_matrix(matrix: np.ndarray <span class="co"># matrix of size (2x2)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                     ) <span class="op">-&gt;</span> <span class="bu">float</span>: <span class="co"># determinant of the matrix</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculate the determinant of a 2x2 matrix.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> matrix.shape <span class="op">!=</span> (<span class="dv">2</span>, <span class="dv">2</span>):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Matrix must be 2x2."</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    a, b, c, d <span class="op">=</span> matrix.flatten()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">*</span> d <span class="op">-</span> b <span class="op">*</span> c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<hr>
-</section>
-<section id="check_invertibility" class="level3">
-<h3 class="anchored" data-anchor-id="check_invertibility">check_invertibility</h3>
-<blockquote class="blockquote">
-<pre><code> check_invertibility (matrix:numpy.ndarray)</code></pre>
-</blockquote>
-<p><em>Check if a matrix is invertible.</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>matrix</td>
-<td>ndarray</td>
-<td>matrix of size (2x2)</td>
-</tr>
-<tr class="even">
-<td><strong>Returns</strong></td>
-<td><strong>bool</strong></td>
-<td><strong>True or False</strong></td>
-</tr>
-</tbody>
-</table>
-<div id="88c1aaf5" class="cell">
-<details open="" class="code-fold">
-<summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_invertibility(matrix: np.ndarray <span class="co"># matrix of size (2x2)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                        ) <span class="op">-&gt;</span> <span class="bu">bool</span>: <span class="co"># True or False</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Check if a matrix is invertible.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    determinant <span class="op">=</span> determinant_matrix(matrix)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> determinant <span class="op">!=</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<hr>
-</section>
-<section id="transform_matrix" class="level3">
-<h3 class="anchored" data-anchor-id="transform_matrix">transform_matrix</h3>
-<blockquote class="blockquote">
-<pre><code> transform_matrix (A:list, T:list, S:list)</code></pre>
-</blockquote>
-<p><em>Transform a matrix A using a transformation matrix T and a scaling matrix S.</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
 <td>list</td>
-<td>Matrix of shape (n, n)</td>
-</tr>
-<tr class="even">
-<td>T</td>
-<td>list</td>
-<td>Matrix of shape (n , m)</td>
-</tr>
-<tr class="odd">
-<td>S</td>
-<td>list</td>
-<td>Matrix of shape (n , k)</td>
+<td>matrix to be inverted size (2, 2)</td>
 </tr>
 <tr class="even">
 <td><strong>Returns</strong></td>
 <td><strong>list</strong></td>
-<td><strong>Matrix of shape (m, k)</strong></td>
+<td><strong>inverse of the matrix</strong></td>
 </tr>
 </tbody>
 </table>
-<div id="3339e472" class="cell">
+<div id="57c77909" class="cell">
 <details open="" class="code-fold">
 <summary>Exported source</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> transform_matrix(A: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]], <span class="co"># Matrix of shape (n, n)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                    T: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]], <span class="co"># Matrix of shape (n , m)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                    S: <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]]  <span class="co"># Matrix of shape (n , k)</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                    ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[Union[<span class="bu">int</span>, <span class="bu">float</span>]]]: <span class="co"># Matrix of shape (m, k)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Transform a matrix A using a transformation matrix T and a scaling matrix S.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> check_invertibility(np.array(T)) <span class="kw">and</span> <span class="kw">not</span> check_invertibility(np.array(S)):</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> np.array(T)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    a, b, c, d <span class="op">=</span> T.flatten()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    determinant <span class="op">=</span> determinant_matrix(T)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    inverse_T <span class="op">=</span> [[d<span class="op">/</span> determinant, <span class="op">-</span>b<span class="op">/</span> determinant], [<span class="op">-</span>c<span class="op">/</span> determinant, a<span class="op">/</span> determinant]]</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inverse_T <span class="op">@</span> np.array(A) <span class="op">@</span> S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> inverse_2x2(matrix: <span class="bu">list</span>[<span class="bu">list</span>[<span class="bu">float</span>]] <span class="co"># matrix to be inverted size (2, 2)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                ) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">list</span>[<span class="bu">float</span>]]: <span class="co"># inverse of the matrix</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    matrix <span class="op">=</span> np.array(matrix)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    a, b, c, d  <span class="op">=</span> matrix.flatten()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    det <span class="op">=</span> a<span class="op">*</span>d <span class="op">-</span> b<span class="op">*</span>c</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> det <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    adj_matrix <span class="op">=</span> np.array([[d, <span class="op">-</span>b], [<span class="op">-</span>c, a]])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    inverse <span class="op">=</span> matrix_scalar_multiply_numpy(<span class="dv">1</span><span class="op">/</span> det, adj_matrix)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inverse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 

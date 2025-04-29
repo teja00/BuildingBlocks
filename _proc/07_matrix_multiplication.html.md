@@ -191,7 +191,7 @@ Let me know if you want the same logic visualized with real numbers or debug pri
 
 ---
 
-[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L61){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L45){target="_blank" style="float:right; font-size:smaller"}
 
 ### matrix_multiply_torch_optimized
 
@@ -228,6 +228,8 @@ def matrix_multiply_torch_optimized(a: List[List[float]], # input matrix of size
 ## Using EINSUM
 
 ---
+
+[source](https://github.com/teja00/BuildingBlocks/blob/main/BuildingBlocks/matrix_multiply.py#L61){target="_blank" style="float:right; font-size:smaller"}
 
 ### matrix_multiply_torch_einsum
 
