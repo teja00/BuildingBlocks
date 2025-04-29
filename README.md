@@ -202,38 +202,5 @@ unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
 ``` python
-# unittest.main(argv=[''], verbosity=2, exit=False)
+unittest.main(argv=[''], verbosity=2, exit=False)
 ```
-
-    test_eigen_value_basic (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_complex (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_float (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_identity (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_negative (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_zero (__main__.TestEigenValueMatrix2by2) ... ok
-    test_dot_basic (__main__.TestMatrixDotVector) ... ok
-    test_dot_floats (__main__.TestMatrixDotVector) ... ok
-    test_dot_identity (__main__.TestMatrixDotVector) ... ok
-    test_dot_zeros (__main__.TestMatrixDotVector) ... ok
-    test_mul_scalar_basic (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_float (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_negative (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
-    test_reshape_basic (__main__.TestMatrixReshape) ... ok
-    test_transpose_different_size (__main__.TestMatrixReshape) ... ok
-    test_transpose_same_size (__main__.TestMatrixReshape) ... ok
-    test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation) ... ok
-    test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation) ... ok
-    test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation) ... ok
-    test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
-    test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
-    test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
-    test_transpose_square (__main__.TestMatrixTranspose) ... ok
-    test_mean_basic (__main__.TestMeanMatrix) ... ok
-
-    ----------------------------------------------------------------------
-    Ran 25 tests in 0.009s
-
-    OK
-
-    <unittest.main.TestProgram>
