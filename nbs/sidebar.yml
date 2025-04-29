@@ -2,20 +2,12 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - section: Matrix Operations
-        contents:
-          - section: Matrix Essentials
-            contents:
-              - 00_matrix_vector_dot_product.ipynb
-              - 01_transpose_of_matrix.ipynb
-              - 02_reshape_matrix.ipynb
-              - 04_matrix_scalar_multiply.ipynb
-          - section: Row/Column Analysis
-            contents:
-              - 03_mean_by_row_column.ipynb
-          - section: Linear Algebra Concepts
-            contents:
-              - 07_matrix_multiplication.ipynb
-              - 08_matrix_inverse.ipynb
-              - 05_eigen_value_matrix.ipynb
-              - 06_matrix_transformation.ipynb
+      - 00_matrix_vector_dot_product.ipynb
+      - 01_transpose_of_matrix.ipynb
+      - 02_reshape_matrix.ipynb
+      - 03_mean_by_row_column.ipynb
+      - 04_matrix_scalar_multiply.ipynb
+      - 05_eigen_value_matrix.ipynb
+      - 06_matrix_transformation.ipynb
+      - 07_matrix_multiplication.ipynb
+      - 08_matrix_inverse.ipynb
