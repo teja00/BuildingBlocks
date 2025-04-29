@@ -46,6 +46,8 @@
     "section": "",
     "text": "source\n\ntranspose_matrix\n\n transpose_matrix (a:List[List[Union[int,float]]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nmatrix a of size (n, m)\n\n\nReturns\ntyping.List[typing.List[typing.Union[int, float]]]\nmatrix of size (m, n)\n\n\n\n\n\nExported source\ndef transpose_matrix(a: List[List[Union[int, float]]] # matrix a of size (n, m)\n                     ) -&gt; List[List[Union[int, float]]]: # matrix of size (m, n) \n    n, m = len(a[0]), len(a)  # n = number of columns, m = number of rows\n    return [[a[i][j] for i in range(m)] for j in range(n)]",
     "crumbs": [
+      "Matrix Operations",
+      "Matrix Essentials",
       "Transpose of a Matrix"
     ]
   },
@@ -76,6 +78,7 @@
     "section": "",
     "text": "source\n\nmatrix_dot_vector\n\n matrix_dot_vector (a:List[List[Union[int,float]]],\n                    b:List[Union[int,float]])\n\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\na\ntyping.List[typing.List[typing.Union[int, float]]]\nMatrix ’ a’ of size m x n\n\n\nb\ntyping.List[typing.Union[int, float]]\nVector ’ b’ of size n x 1\n\n\nReturns\ntyping.List[typing.Union[int, float]]\nResulting vector of size m x 1:\n\n\n\n\n\nExported source\ndef matrix_dot_vector(a: List[List[Union[int, float]]] # Matrix ' a' of size m x n\n                      , b: List[Union[int, float]] # Vector ' b' of size n x 1\n                      ) -&gt; List[Union[int, float]]: # Resulting vector of size m x 1:\n    if not all(len(row) == len(b) for row in a):\n        return -1\n    result = []\n    for row in a:\n        dot = sum(x * y for x, y in zip(row, b))\n        result.append(dot)\n    return result",
     "crumbs": [
+      "MatrixOperations",
       "Matrix Vector Dot Product"
     ]
   },
