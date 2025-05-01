@@ -6,7 +6,14 @@ settings.ini
 setup.py
 BuildingBlocks/__init__.py
 BuildingBlocks/_modidx.py
+BuildingBlocks/eigen_value_matrix.py
+BuildingBlocks/matrix_inverse.py
+BuildingBlocks/matrix_multiply.py
+BuildingBlocks/matrix_scalar_multiply.py
+BuildingBlocks/matrix_transformation.py
 BuildingBlocks/matrix_vector_dot_product.py
+BuildingBlocks/mean_row_column.py
+BuildingBlocks/reshape_matrix.py
 BuildingBlocks/transpose_matrix.py
 BuildingBlocks.egg-info/PKG-INFO
 BuildingBlocks.egg-info/SOURCES.txt
