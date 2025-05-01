@@ -236,7 +236,7 @@ unittest.main(argv=[''], verbosity=2, exit=False)
 
 ::: {#cell-22 .cell}
 ``` {.python .cell-code}
-unittest.main(argv=[''], verbosity=2, exit=False)
+# unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -258,51 +258,28 @@ test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
 test_reshape_basic (__main__.TestMatrixReshape) ... ok
 test_transpose_different_size (__main__.TestMatrixReshape) ... ok
 test_transpose_same_size (__main__.TestMatrixReshape) ... ok
-test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation) ... ERROR
-test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation) ... ERROR
-test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation) ... ERROR
+test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation) ... ok
+test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation) ... ok
+test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation) ... ok
 test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
 test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
 test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
 test_transpose_square (__main__.TestMatrixTranspose) ... ok
 test_mean_basic (__main__.TestMeanMatrix) ... ok
 
-======================================================================
-ERROR: test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/var/folders/rx/c264lbnd6ws42tkcmdqfl9y80000gn/T/ipykernel_38993/516510533.py", line 9, in test_matrix_transformation_test_case_1
-    result = transform_matrix(A, T, S)
-NameError: name 'transform_matrix' is not defined
+Ran 25 tests in 0.013s
 
-======================================================================
-ERROR: test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/var/folders/rx/c264lbnd6ws42tkcmdqfl9y80000gn/T/ipykernel_38993/516510533.py", line 24, in test_matrix_transformation_test_case_2
-    result = transform_matrix(A, T, S)
-NameError: name 'transform_matrix' is not defined
-
-======================================================================
-ERROR: test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/var/folders/rx/c264lbnd6ws42tkcmdqfl9y80000gn/T/ipykernel_38993/516510533.py", line 39, in test_matrix_transformation_test_case_3
-    result = transform_matrix(A, T, S)
-NameError: name 'transform_matrix' is not defined
-
-----------------------------------------------------------------------
-Ran 25 tests in 0.021s
-
-FAILED (errors=3)
+OK
 ```
 :::
 
-::: {.cell-output .cell-output-display execution_count=45}
+::: {.cell-output .cell-output-display}
 ```
-<unittest.main.TestProgram at 0x13fc0a610>
+<unittest.main.TestProgram>
 ```
 :::
 :::
+
 
 

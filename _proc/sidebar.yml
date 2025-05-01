@@ -2,6 +2,9 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - section: MachineLearning
+        contents:
+          - MachineLearning/01_datasetDistribution.ipynb
       - section: Matrix
         contents:
           - section: Algebra

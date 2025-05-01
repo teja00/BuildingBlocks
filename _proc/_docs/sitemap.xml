@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/index.html</loc>
-    <lastmod>2025-04-29T04:39:39.876Z</lastmod>
+    <lastmod>2025-05-01T13:47:01.276Z</lastmod>
   </url>
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/mean_by_row_column.html</loc>
@@ -111,5 +111,9 @@
   <url>
     <loc>https://teja00.github.io/BuildingBlocks/Matrix/Algebra/matrix_transformation.html</loc>
     <lastmod>2025-04-29T04:36:23.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://teja00.github.io/BuildingBlocks/MachineLearning/01_datasetDistribution.html</loc>
+    <lastmod>2025-05-01T13:47:01.276Z</lastmod>
   </url>
 </urlset>
