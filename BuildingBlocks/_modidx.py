@@ -38,4 +38,6 @@ d = { 'settings': { 'branch': 'main',
             'BuildingBlocks.reshape_matrix': { 'BuildingBlocks.reshape_matrix.reshape_matrix': ( 'Matrix/Matrix-Essentials/reshape_matrix.html#reshape_matrix',
                                                                                                  'BuildingBlocks/reshape_matrix.py')},
             'BuildingBlocks.transpose_matrix': { 'BuildingBlocks.transpose_matrix.transpose_matrix': ( 'Matrix/Matrix-Essentials/transpose_of_matrix.html#transpose_matrix',
-                                                                                                       'BuildingBlocks/transpose_matrix.py')}}}
+                                                                                                       'BuildingBlocks/transpose_matrix.py')},
+            'BuildingBlocks.visualization_dp': { 'BuildingBlocks.visualization_dp.visualize_dp_history': ( 'DpVisualization/visbruteforce.html#visualize_dp_history',
+                                                                                                           'BuildingBlocks/visualization_dp.py')}}}

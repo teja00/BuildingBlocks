@@ -192,6 +192,68 @@ class TestMatrixTransformation(unittest.TestCase):
         )
 ```
 
+### Unit TestSuite Matrix Multiplication
+
+``` python
+# <- needed to recognise Torch tensors>
+
+class TestMatrixMultiplication(unittest.TestCase):
+    def _to_nested_list(self, obj):
+        """Convert torch.Tensor → nested Python list (else pass through)."""
+        if isinstance(obj, torch.Tensor):
+            return obj.tolist()
+        return obj
+
+    def assertMatrixEqual(self, result, expected):
+        """Wrapper so we can compare list↔tensor transparently."""
+        self.assertEqual(self._to_nested_list(result), expected)
+
+    def test_matrix_multiply_basic(self):
+        A = [[1, 2], [3, 4]]
+        B = [[5, 6], [7, 8]]
+        expected = [[19, 22], [43, 50]]
+
+        start = time.time()
+        self.assertMatrixEqual(matrix_multiply(A, B), expected)
+        print("Execution time (pure-py):", time.time() - start)
+
+        start = time.time()
+        self.assertMatrixEqual(matrix_multiply_torch(A, B), expected)
+        print("Execution time (torch):", time.time() - start)
+
+        start = time.time()
+        self.assertMatrixEqual(matrix_multiply_torch_optimized(A, B), expected)
+        print("Execution time (torch-opt):", time.time() - start)
+
+        start = time.time()
+        self.assertMatrixEqual(matrix_multiply_torch_einsum(A, B), expected)
+        print("Execution time (einsum):", time.time() - start)
+
+    def test_matrix_multiply_zeros(self):
+        self.assertMatrixEqual(
+            matrix_multiply([[0, 0], [0, 0]], [[1, 2], [3, 4]]),
+            [[0, 0], [0, 0]]
+        )
+
+    def test_matrix_multiply_identity(self):
+        self.assertMatrixEqual(
+            matrix_multiply([[1, 0], [0, 1]], [[5, 6], [7, 8]]),
+            [[5, 6], [7, 8]]
+        )
+
+    def test_matrix_multiply_non_square(self):
+        self.assertMatrixEqual(
+            matrix_multiply([[1, 2]], [[3], [4]]),
+            [[11]]
+        )
+
+    def test_matrix_multiply_float(self):
+        A = [[1.5, -2], [-3, 4.5]]
+        B = [[2], [1]]
+        expected = [[1.0], [-1.5]]
+        self.assertMatrixEqual(matrix_multiply(A, B), expected)
+```
+
 ### Testing functionality
 
 To test the functionality you can use the below code to run the above
@@ -202,38 +264,54 @@ unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
 ``` python
-# unittest.main(argv=[''], verbosity=2, exit=False)
+unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
-    test_eigen_value_basic (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_complex (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_float (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_identity (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_negative (__main__.TestEigenValueMatrix2by2) ... ok
-    test_eigen_value_zero (__main__.TestEigenValueMatrix2by2) ... ok
-    test_dot_basic (__main__.TestMatrixDotVector) ... ok
-    test_dot_floats (__main__.TestMatrixDotVector) ... ok
-    test_dot_identity (__main__.TestMatrixDotVector) ... ok
-    test_dot_zeros (__main__.TestMatrixDotVector) ... ok
-    test_mul_scalar_basic (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_float (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_negative (__main__.TestMatrixMulScalar) ... ok
-    test_mul_scalar_zero (__main__.TestMatrixMulScalar) ... ok
-    test_reshape_basic (__main__.TestMatrixReshape) ... ok
-    test_transpose_different_size (__main__.TestMatrixReshape) ... ok
-    test_transpose_same_size (__main__.TestMatrixReshape) ... ok
-    test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation) ... ok
-    test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation) ... ok
-    test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation) ... ok
-    test_transpose_rectangle (__main__.TestMatrixTranspose) ... ok
-    test_transpose_single_column (__main__.TestMatrixTranspose) ... ok
-    test_transpose_single_row (__main__.TestMatrixTranspose) ... ok
-    test_transpose_square (__main__.TestMatrixTranspose) ... ok
-    test_mean_basic (__main__.TestMeanMatrix) ... ok
+    test_eigen_value_basic (__main__.TestEigenValueMatrix2by2.test_eigen_value_basic) ... ok
+    test_eigen_value_complex (__main__.TestEigenValueMatrix2by2.test_eigen_value_complex) ... ok
+    test_eigen_value_float (__main__.TestEigenValueMatrix2by2.test_eigen_value_float) ... ok
+    test_eigen_value_identity (__main__.TestEigenValueMatrix2by2.test_eigen_value_identity) ... ok
+    test_eigen_value_negative (__main__.TestEigenValueMatrix2by2.test_eigen_value_negative) ... ok
+    test_eigen_value_zero (__main__.TestEigenValueMatrix2by2.test_eigen_value_zero) ... ok
+    test_dot_basic (__main__.TestMatrixDotVector.test_dot_basic) ... ok
+    test_dot_floats (__main__.TestMatrixDotVector.test_dot_floats) ... ok
+    test_dot_identity (__main__.TestMatrixDotVector.test_dot_identity) ... ok
+    test_dot_zeros (__main__.TestMatrixDotVector.test_dot_zeros) ... ok
+    test_mul_scalar_basic (__main__.TestMatrixMulScalar.test_mul_scalar_basic) ... ok
+    test_mul_scalar_float (__main__.TestMatrixMulScalar.test_mul_scalar_float) ... ok
+    test_mul_scalar_negative (__main__.TestMatrixMulScalar.test_mul_scalar_negative) ... ok
+    test_mul_scalar_zero (__main__.TestMatrixMulScalar.test_mul_scalar_zero) ... ok
+    test_matrix_multiply_basic (__main__.TestMatrixMultiplication.test_matrix_multiply_basic) ... ok
+    test_matrix_multiply_float (__main__.TestMatrixMultiplication.test_matrix_multiply_float) ... ok
+    test_matrix_multiply_identity (__main__.TestMatrixMultiplication.test_matrix_multiply_identity) ... ok
+    test_matrix_multiply_non_square (__main__.TestMatrixMultiplication.test_matrix_multiply_non_square) ... ok
+    test_matrix_multiply_zeros (__main__.TestMatrixMultiplication.test_matrix_multiply_zeros) ... ok
+    test_reshape_basic (__main__.TestMatrixReshape.test_reshape_basic) ... ok
+    test_transpose_different_size (__main__.TestMatrixReshape.test_transpose_different_size) ... ok
+    test_transpose_same_size (__main__.TestMatrixReshape.test_transpose_same_size) ... ok
+    test_matrix_transformation_test_case_1 (__main__.TestMatrixTransformation.test_matrix_transformation_test_case_1) ... ok
+    test_matrix_transformation_test_case_2 (__main__.TestMatrixTransformation.test_matrix_transformation_test_case_2) ... ok
+    test_matrix_transformation_test_case_3 (__main__.TestMatrixTransformation.test_matrix_transformation_test_case_3) ... ok
+    test_transpose_rectangle (__main__.TestMatrixTranspose.test_transpose_rectangle) ... ok
+    test_transpose_single_column (__main__.TestMatrixTranspose.test_transpose_single_column) ... ok
+    test_transpose_single_row (__main__.TestMatrixTranspose.test_transpose_single_row) ... ok
+    test_transpose_square (__main__.TestMatrixTranspose.test_transpose_square) ... ok
+    test_mean_basic (__main__.TestMeanMatrix.test_mean_basic) ... ok
 
     ----------------------------------------------------------------------
-    Ran 25 tests in 0.013s
+    Ran 30 tests in 0.048s
 
     OK
+
+    Execution time (pure-py): 4.8160552978515625e-05
+    Execution time (torch): 0.0004215240478515625
+    tensor([19., 22.]) tensor([[1],
+            [2]]) tensor([[5, 6],
+            [7, 8]])
+    tensor([43., 50.]) tensor([[3],
+            [4]]) tensor([[5, 6],
+            [7, 8]])
+    Execution time (torch-opt): 0.0015892982482910156
+    Execution time (einsum): 9.179115295410156e-05
 
     <unittest.main.TestProgram>

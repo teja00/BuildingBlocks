@@ -2,6 +2,9 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - section: DpVisualization
+        contents:
+          - DpVisualization/01_visBruteForce.ipynb
       - section: MachineLearning
         contents:
           - MachineLearning/01_datasetDistribution.ipynb
