@@ -5,44 +5,54 @@
 # %% auto 0
 __all__ = ['DPType', 'visualize_dp_history']
 
-# %% ../nbs/DpVisualization/01_visBruteForce.ipynb 2
+# %% ../nbs/DpVisualization/01_visBruteForce.ipynb 3
 import ipywidgets as widgets
 from IPython.display import display, clear_output
 import copy
 from typing import Union, List, Any
 
-# %% ../nbs/DpVisualization/01_visBruteForce.ipynb 4
+# %% ../nbs/DpVisualization/01_visBruteForce.ipynb 5
+from typing import Union, List, Any, Optional
+
 DPType = Union[
     List[Any],
     List[List[Any]],
     List[List[List[Any]]]
 ]
 
-def visualize_dp_history(dp_history : DPType,  # a list of lists with any type is acceptable
-                         ): # -> None:
+def visualize_dp_history(
+    dp_history: DPType,                 # List of DP states (various levels)
+    extra_vars: Optional[List[Any]] = None  # Optional extra variable tracking
+): 
     """
-    returns a widget to visualize the history of a dynamic programming table.
+    Returns a widget to visualize the history of a dynamic programming table.
+    
+    Parameters:
+    - dp_history: A list of DP states (can be 1D, 2D, or 3D).
+    - extra_vars: (Optional) A list of any extra info (e.g., (i, j) or dicts) to show per step.
     """
 
-    # State index tracker
     state_index = widgets.IntText(value=0, description="Index:", disabled=True)
-
-    # Output widget
     output = widgets.Output()
 
-    # Display function
     def update_display():
         with output:
             clear_output(wait=True)
             i = state_index.value
             print(f"Step {i}:")
-            if isinstance(dp_history[i], list) and all(isinstance(row, list) for row in dp_history[i]):
-                print("DP Table:")
-                for row in dp_history[i]:
+
+            # Display extra vars if provided
+            if extra_vars is not None and i < len(extra_vars):
+                print(f"Extra: {repr(extra_vars[i])}")
+
+            # Display DP Table
+            state = dp_history[i]
+            print("DP Table:")
+            if isinstance(state, list) and all(isinstance(row, list) for row in state):
+                for row in state:
                     print(row)
             else:
-                print("DP Table:")
-                print(dp_history[i])
+                print(state)
 
     # Buttons
     prev_button = widgets.Button(description="Previous")
@@ -69,3 +79,4 @@ def visualize_dp_history(dp_history : DPType,  # a list of lists with any type i
     # Layout
     controls = widgets.HBox([prev_button, next_button])
     display(controls, output)
+
