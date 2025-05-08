@@ -53,7 +53,7 @@ from BuildingBlocks.matrix_scalar_multiply import *
 
 ### Unit Test Suite for Matrix dot product Vector
 
-::: {#cell-8 .cell execution_count=8}
+::: {#cell-8 .cell}
 ``` {.python .cell-code}
 class TestMatrixDotVector(unittest.TestCase):
     
@@ -75,7 +75,7 @@ class TestMatrixDotVector(unittest.TestCase):
 
 ### Unit TestSuite for Transpose Matrix
 
-::: {#cell-10 .cell execution_count=9}
+::: {#cell-10 .cell}
 ``` {.python .cell-code}
 class TestMatrixTranspose(unittest.TestCase):
     # Tests for transpose_matrix
@@ -96,7 +96,7 @@ class TestMatrixTranspose(unittest.TestCase):
 
 ### Unit TestSuite for Reshaping Matrix
 
-::: {#cell-12 .cell execution_count=10}
+::: {#cell-12 .cell}
 ``` {.python .cell-code}
 class TestMatrixReshape(unittest.TestCase):
     # Tests for transpose_matrix
@@ -114,7 +114,7 @@ class TestMatrixReshape(unittest.TestCase):
 
 ### Unit TestSuite for Mean by Row or column
 
-::: {#cell-14 .cell execution_count=11}
+::: {#cell-14 .cell}
 ``` {.python .cell-code}
 class TestMeanMatrix(unittest.TestCase):
     # Tests for transpose_matrix
@@ -126,7 +126,7 @@ class TestMeanMatrix(unittest.TestCase):
 
 ### Unit TestSuite for Matrix Scalar Multiplication
 
-::: {#cell-16 .cell execution_count=12}
+::: {#cell-16 .cell}
 ``` {.python .cell-code}
 class TestMatrixMulScalar(unittest.TestCase):
     # Tests for transpose_matrix
@@ -144,7 +144,7 @@ class TestMatrixMulScalar(unittest.TestCase):
 
 ### Unit TestSuite for Eigen Value Calculation
 
-::: {#cell-18 .cell execution_count=13}
+::: {#cell-18 .cell}
 ``` {.python .cell-code}
 class TestEigenValueMatrix2by2(unittest.TestCase):
     def assertListAlmostEqual(self, list1, list2, places=5):
@@ -175,7 +175,7 @@ class TestEigenValueMatrix2by2(unittest.TestCase):
 
 ### Unit TestSuite Matrix Transformation
 
-::: {#cell-20 .cell execution_count=14}
+::: {#cell-20 .cell}
 ``` {.python .cell-code}
 class TestMatrixTransformation(unittest.TestCase):
     def test_matrix_transformation_test_case_1(self):
@@ -228,7 +228,7 @@ class TestMatrixTransformation(unittest.TestCase):
 
 ### Unit TestSuite Matrix Multiplication 
 
-::: {#cell-22 .cell execution_count=15}
+::: {#cell-22 .cell}
 ``` {.python .cell-code}
 # <- needed to recognise Torch tensors>
 
@@ -299,7 +299,7 @@ To test the functionality you can use the below code to run the above tests
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
 
-::: {#cell-24 .cell execution_count=16}
+::: {#cell-24 .cell}
 ``` {.python .cell-code}
 unittest.main(argv=[''], verbosity=2, exit=False)
 ```
@@ -359,9 +359,9 @@ Execution time (einsum): 9.179115295410156e-05
 ```
 :::
 
-::: {.cell-output .cell-output-display execution_count=16}
+::: {.cell-output .cell-output-display}
 ```
-<unittest.main.TestProgram at 0x74b58c67e270>
+<unittest.main.TestProgram>
 ```
 :::
 :::
